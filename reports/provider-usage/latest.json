@@ -1,0 +1,86 @@
+{
+  "commands": {
+    "gh_auth_status": {
+      "exit_code": 0,
+      "ok": true,
+      "stderr": "",
+      "stdout": "github.com\n  \u2713 Logged in to github.com account cbmagent (keyring)\n  - Active account: true\n  - Git operations protocol: https\n  - Token: [REDACTED]\n  - Token scopes: 'admin:enterprise', 'admin:gpg_key', 'admin:org', 'admin:org_hook', 'admin:public_key', 'admin:repo_hook', 'admin:ssh_signing_key', 'audit_log', 'codespace', 'copilot', 'delete:packages', 'delete_repo', 'gist', 'notifications', 'project', 'repo', 'user', 'workflow', 'write:discussion', 'write:network_configurations', 'write:packages'\n\n  \u2713 Logged in to github.com account clarkemoyer (/home/cbmagent/.config/gh/hosts.yml)\n  - Active account: false\n  - Git operations protocol: https\n  - Token: [REDACTED]\n  - Token scopes: 'gist', 'read:org', 'repo', 'workflow'\n"
+    },
+    "hermes_auth_list_names_only": {
+      "exit_code": 0,
+      "ok": true,
+      "stderr": "",
+      "stdout": "copilot (1 credentials):\n  #1  gh auth [REDACTED]\n\nnous (1 credentials):\n  #1  device_code          oauth   device_code \u2190\n\nopenai-codex (1 credentials):\n  #1  openai-codex-oauth-1 oauth   device_code \u2190\n\n"
+    },
+    "hermes_config_provider_model": {
+      "exit_code": 0,
+      "ok": true,
+      "stderr": "",
+      "stdout": "\u25c6 Model\n  Model:        {'default': 'gpt-5.5', 'provider': 'openai-codex'}\n  Model:        (auto)\n"
+    },
+    "hermes_status": {
+      "exit_code": 0,
+      "ok": true,
+      "stderr": "",
+      "stdout": "\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                 \u2695 Hermes Agent Status                  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\n\u25c6 Environment\n  Project:      /home/cbmagent/.hermes/hermes-agent\n  Python:       3.11.15\n  .env file:    \u2713 exists\n  Model:        gpt-5.5\n  Provider:     OpenAI Codex\n\n\u25c6 API Keys\n  OpenRouter    \u2717 (not set)\n  OpenAI        \u2717 (not set)\n  NVIDIA        \u2717 (not set)\n  Z.AI/GLM      \u2717 (not set)\n  Kimi          \u2717 (not set)\n  StepFun Step Plan  \u2717 (not set)\n  MiniMax       \u2717 (not set)\n  MiniMax-CN    \u2717 (not set)\n  Firecrawl     \u2717 (not set)\n  Tavily        \u2717 (not set)\n  Browser Use   \u2717 (not set)\n  Browserbase   \u2717 (not set)\n  FAL           \u2717 (not set)\n  Tinker        \u2717 (not set)\n  WandB         \u2717 (not set)\n  ElevenLabs    \u2717 (not set)\n  GitHub        \u2717 (not set)\n  Anthropic     \u2717 (not set)\n\n\u25c6 Auth Providers\n  Nous Portal   \u2713 logged in\n    Portal URL: https://portal.nousresearch.com\n    Access exp: 2026-05-03 17:40:51 EDT\n    Key exp:    2026-05-04 15:53:41 EDT\n    Refresh:    yes\n  OpenAI Codex  \u2713 logged in\n    Auth file:  /home/cbmagent/.hermes/auth.json\n    Refreshed:  2026-05-03 16:14:31 EDT\n  Qwen OAuth    \u2717 not logged in (run: qwen auth qwen-oauth)\n    Auth file:  /home/cbmagent/.qwen/oauth_creds.json\n    Error:      Qwen CLI credentials not found. Run 'qwen auth qwen-oauth' first.\n  MiniMax OAuth  \u2717 not logged in (run: hermes auth add minimax-oauth)\n\n\u25c6 Nous Tool Gateway\n  Nous Portal   \u2713 managed tools available\n  Web tools       \u2713 included by subscription, not currently selected\n  Image generation \u2713 active via Nous subscription\n  OpenAI TTS      \u2713 active via Edge TTS\n  Browser automation \u2713 active via Nous subscription\n  Modal execution \u2713 active via local\n\n\u25c6 API-Key Providers\n  Z.AI / GLM       \u2717 not configured (run: hermes model)\n  Kimi / Moonshot  \u2717 not configured (run: hermes model)\n  StepFun Step Plan \u2717 not configured (run: hermes model)\n  MiniMax          \u2717 not configured (run: hermes model)\n  MiniMax (China)  \u2717 not configured (run: hermes model)\n\n\u25c6 Terminal Backend\n  Backend:      local\n  Sudo:         \u2717 disabled\n\n\u25c6 Messaging Platforms\n  Telegram      \u2713 configured (home: 8742801497)\n  Discord       \u2717 not configured\n  WhatsApp      \u2717 not configured\n  Signal        \u2717 not configured\n  Slack         \u2717 not configured\n  Email         \u2717 not configured\n  SMS           \u2717 not configured\n  DingTalk      \u2717 not configured\n  Feishu        \u2717 not configured\n  WeCom         \u2717 not configured\n  WeCom Callback  \u2717 not configured\n  Weixin        \u2717 not configured\n  BlueBubbles   \u2717 not configured\n  QQBot         \u2717 not configured\n  Yuanbao       \u2717 not configured\n\n\u25c6 Gateway Service\n  Status:       \u2713 running\n  Manager:      systemd (user)\n  PID(s):       31463\n\n\u25c6 Scheduled Jobs\n  Jobs:         0\n\n\u25c6 Sessions\n  Active:       1 session(s)\n\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n  Run 'hermes doctor' for detailed diagnostics\n  Run 'hermes setup' to configure\n\n"
+    },
+    "recent_brain_actions_runs": {
+      "exit_code": 0,
+      "ok": true,
+      "stderr": "",
+      "stdout": ""
+    }
+  },
+  "generated_at_utc": "2026-05-03T21-36-23Z",
+  "notes": [
+    "OpenAI Codex OAuth/ChatGPT subscription quota is opaque from CLI; report observed failures/cooldowns rather than claiming exact remaining quota.",
+    "Provider routing recommendations should prefer read-only/local/GitHub Actions tasks when premium model quota appears constrained."
+  ],
+  "redacted": true,
+  "services": {
+    "openclaw_gateway_root": {
+      "body_head": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>OpenClaw Control</title>\n    <meta name=\"color-scheme\" content=\"dark light\" />\n    <link rel=\"icon\" type=\"image/svg+xml\" href=\"./favicon.svg\" />\n    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"./favicon-32.png\" />\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"./apple-touch-icon.png\" />\n    <link rel=\"manifest\" href=\"mani",
+      "ok": true,
+      "status": 200
+    },
+    "openclaw_models": {
+      "body_head": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>OpenClaw Control</title>\n    <meta name=\"color-scheme\" content=\"dark light\" />\n    <link rel=\"icon\" type=\"image/svg+xml\" href=\"./favicon.svg\" />\n    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"./favicon-32.png\" />\n    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"./apple-touch-icon.png\" />\n    <link rel=\"manifest\" href=\"mani",
+      "ok": true,
+      "status": 200
+    }
+  },
+  "signals": {
+    "hermes_agent_log": [
+      "2026-05-03 16:15:00,792 INFO hermes_cli.plugins: Plugin 'openai-codex' registered image_gen provider: openai-codex",
+      "2026-05-03 16:15:00,793 INFO hermes_cli.plugins: Plugin 'xai' registered image_gen provider: xai",
+      "2026-05-03 16:15:05,848 INFO agent.auxiliary_client: Vision auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:15:06,244 INFO agent.auxiliary_client: Vision auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:15:07,165 INFO agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:18:00,179 INFO [20260503_150903_d1cc7c] agent.auxiliary_client: Vision auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:18:00,207 INFO [20260503_150903_d1cc7c] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:18:44,606 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:18:44,616 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:18:44,626 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:18:44,636 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:18:44,648 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:18:44,661 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:18:44,674 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:42:44,777 ERROR tools.vision_tools: Error analyzing image: Invalid image source. Provide an HTTP/HTTPS URL or a valid local file path.",
+      "    raise ValueError(",
+      "ValueError: Invalid image source. Provide an HTTP/HTTPS URL or a valid local file path.",
+      "2026-05-03 16:51:23,496 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 16:57:07,398 INFO agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)",
+      "2026-05-03 17:25:50,280 INFO agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)"
+    ],
+    "hermes_gateway_log": [
+      "2026-05-03 02:13:22,974 WARNING gateway.platforms.telegram: [Telegram] Connect attempt 1/8 failed: httpx.ConnectError: All connection attempts failed \u2014 retrying in 1s",
+      "2026-05-03 02:13:23,979 WARNING gateway.platforms.telegram: [Telegram] Connect attempt 2/8 failed: httpx.ConnectError: All connection attempts failed \u2014 retrying in 2s",
+      "2026-05-03 10:17:06,471 WARNING gateway.platforms.telegram: [Telegram] Connect attempt 1/8 failed: httpx.ConnectError: All connection attempts failed \u2014 retrying in 1s",
+      "2026-05-03 10:17:07,475 WARNING gateway.platforms.telegram: [Telegram] Connect attempt 2/8 failed: httpx.ConnectError: All connection attempts failed \u2014 retrying in 2s",
+      "2026-05-03 14:29:23,757 WARNING gateway.platforms.telegram: [Telegram] Telegram network error, scheduling reconnect: httpx.ReadError: ",
+      "2026-05-03 14:29:23,757 WARNING gateway.platforms.telegram: [Telegram] Telegram network error (attempt 1/10), reconnecting in 5s. Error: httpx.ReadError: ",
+      "2026-05-03 14:29:30,125 INFO gateway.platforms.telegram: [Telegram] Telegram polling resumed after network error (attempt 1)",
+      "2026-05-03 15:04:18,542 INFO gateway.run: inbound message: platform=telegram user=cbm agent chat=8742801497 msg='Im getting this error on my session with openclaw \u26a0\ufe0f Something went wrong while '"
+    ]
+  }
+}
