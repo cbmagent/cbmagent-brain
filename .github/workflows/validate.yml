@@ -1,0 +1,68 @@
+name: Validate brain repo
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install validation dependencies
+        run: python -m pip install --upgrade pip PyYAML
+
+      - name: Validate YAML
+        run: python scripts/validate-yaml.py
+
+      - name: Compile Python scripts
+        run: python -m compileall scripts
+
+      - name: Validate JSON files
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for path in list(Path('.vscode').glob('*.json')) + list(Path('workspaces').glob('*.code-workspace')) + list(Path('reports').glob('**/*.json')):
+              with path.open(encoding='utf-8') as f:
+                  json.load(f)
+              print(f'{path}: JSON ok')
+          PY
+
+      - name: Secret hygiene smoke check
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          suspicious = ['BEGIN OPENSSH PRIVATE KEY', 'BEGIN RSA PRIVATE KEY', 'ghp_', 'github_pat_', 'sk-', 'Bearer ']
+          ignore_dirs = {'.git'}
+          failures = []
+          for path in Path('.').rglob('*'):
+              if any(part in ignore_dirs for part in path.parts):
+                  continue
+              if not path.is_file():
+                  continue
+              try:
+                  text = path.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              for token in suspicious:
+                  if token in text:
+                      failures.append((str(path), token))
+          if failures:
+              for path, token in failures:
+                  print(f'Potential secret marker {token!r} in {path}')
+              raise SystemExit(1)
+          print('No obvious secret markers found')
+          PY
