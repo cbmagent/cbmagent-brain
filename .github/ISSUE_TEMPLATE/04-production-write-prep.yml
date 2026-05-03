@@ -1,0 +1,37 @@
+name: '04. Production Write Preparation'
+description: Prepare a gated production change without bypassing human approval.
+title: '[WRITE-GATED PREP] '
+labels: ['write-gated', 'status:blocked-human']
+body:
+  - type: dropdown
+    id: system
+    attributes:
+      label: External system
+      options:
+        - cloudflare
+        - github
+        - microsoft
+        - google
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: desired_change
+    attributes:
+      label: Desired production change
+    validations:
+      required: true
+  - type: textarea
+    id: readonly_evidence
+    attributes:
+      label: Read-only preflight evidence
+      description: Paste/link audit output, dry-run report, or workflow artifact.
+  - type: checkboxes
+    id: gates
+    attributes:
+      label: Required gates
+      options:
+        - label: Read-only preflight completed
+        - label: Dry-run plan attached
+        - label: Human approval required before live execution
+        - label: Post-change verification plan defined

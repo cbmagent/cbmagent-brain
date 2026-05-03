@@ -1,0 +1,63 @@
+- name: documentation
+  description: Documentation and runbook changes
+  color: '0075ca'
+- name: agent-brain
+  description: Provider-neutral agent brain operating model
+  color: '5319e7'
+- name: portfolio
+  description: Cross-repo portfolio/domain tracking
+  color: '1d76db'
+- name: domain-inventory
+  description: Domain, DNS, Cloudflare, or redirect inventory
+  color: '0e8a16'
+- name: github-pages
+  description: GitHub Pages configuration, deployment, or cutover
+  color: '5319e7'
+- name: cloudflare
+  description: Cloudflare DNS, redirects, or zone management
+  color: 'f6821f'
+- name: microsoft
+  description: Microsoft 365, Entra, Graph, DKIM, or Clarity work
+  color: '2f80ed'
+- name: google
+  description: Google Workspace, Analytics, Search Console, or Drive work
+  color: '34a853'
+- name: readonly
+  description: Safe read-only audit/report workflow
+  color: 'c2e0c6'
+- name: write-gated
+  description: Production mutation requiring approval/protected environment
+  color: 'd93f0b'
+- name: upstream-candidate
+  description: Reusable improvement that may belong in a source repo
+  color: 'fbca04'
+- name: nonprofit-giveback
+  description: Work that gives value back to Free For Charity/nonprofit tooling
+  color: 'b60205'
+- name: tabs-alignment
+  description: Alignment with technologyadoptionbarriers.org advanced patterns
+  color: '7057ff'
+- name: provider-usage
+  description: Provider/model/quota/usage monitoring
+  color: 'bfdadc'
+- name: vscode
+  description: VS Code operator workspace or local development console
+  color: '006b75'
+- name: priority:p0
+  description: Critical/urgent
+  color: 'b60205'
+- name: priority:p1
+  description: High priority
+  color: 'd93f0b'
+- name: priority:p2
+  description: Medium priority
+  color: 'fbca04'
+- name: priority:p3
+  description: Low priority
+  color: 'c5def5'
+- name: status:blocked-human
+  description: Waiting on Clarke or another human approval/action
+  color: 'd876e3'
+- name: status:agent-ready
+  description: Ready for autonomous agent work
+  color: '0e8a16'

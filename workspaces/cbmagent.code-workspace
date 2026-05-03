@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "name": "cbmagent-brain",
+      "path": ".."
+    },
+    {
+      "name": "clarkemoyer.com",
+      "path": "../../clarkemoyer.com"
+    }
+  ],
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "git.autofetch": true
+  },
+  "extensions": {
+    "recommendations": [
+      "GitHub.vscode-pull-request-github",
+      "GitHub.vscode-github-actions",
+      "GitHub.copilot",
+      "GitHub.copilot-chat",
+      "DavidAnson.vscode-markdownlint",
+      "redhat.vscode-yaml",
+      "esbenp.prettier-vscode",
+      "ms-playwright.playwright"
+    ]
+  }
+}

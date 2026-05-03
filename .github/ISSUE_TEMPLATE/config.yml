@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Agent Brain Operating Notes
+    url: https://github.com/cbmagent/cbmagent-brain/blob/main/AGENTS.md
+    about: Review the provider-neutral agent operating rules.
