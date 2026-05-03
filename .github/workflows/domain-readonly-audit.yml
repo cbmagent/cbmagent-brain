@@ -1,0 +1,55 @@
+name: Read-only domain audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Twice daily UTC. Public DNS/HTTP only; no secrets required.
+    - cron: '17 5,17 * * *'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install DNS tools and Python dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dnsutils
+          python -m pip install --upgrade pip PyYAML
+
+      - name: Run read-only domain audit
+        run: python scripts/domain-readonly-audit.py
+
+      - name: Upload audit reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: domain-readonly-audit
+          path: |
+            portfolio/dns-audit-reports/latest.md
+            portfolio/dns-audit-reports/latest.json
+
+      - name: Comment summary on domain audit epic when manually run
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo 'Read-only domain audit completed.'
+            echo
+            echo 'Artifact: domain-readonly-audit'
+            echo
+            echo 'Top summary:'
+            sed -n '1,40p' portfolio/dns-audit-reports/latest.md
+          } > /tmp/domain-audit-comment.md
+          gh issue comment 14 --repo "${{ github.repository }}" --body-file /tmp/domain-audit-comment.md
