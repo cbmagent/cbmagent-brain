@@ -47,9 +47,13 @@ jobs:
           from pathlib import Path
           suspicious = ['BEGIN OPENSSH PRIVATE KEY', 'BEGIN RSA PRIVATE KEY', 'ghp_', 'github_pat_', 'sk-', 'Bearer ']
           ignore_dirs = {'.git'}
+          # These files contain marker strings as scanner/redaction patterns, not secrets.
+          ignore_files = {'.github/workflows/validate.yml', 'scripts/provider-usage-report.py'}
           failures = []
           for path in Path('.').rglob('*'):
               if any(part in ignore_dirs for part in path.parts):
+                  continue
+              if str(path) in ignore_files:
                   continue
               if not path.is_file():
                   continue
