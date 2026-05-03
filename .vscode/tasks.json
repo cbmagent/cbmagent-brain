@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Hermes: status",
+      "type": "shell",
+      "command": "hermes status",
+      "problemMatcher": []
+    },
+    {
+      "label": "Hermes: auth list",
+      "type": "shell",
+      "command": "hermes auth list",
+      "problemMatcher": []
+    },
+    {
+      "label": "Brain: validate YAML",
+      "type": "shell",
+      "command": "python3 scripts/validate-yaml.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Brain: run read-only domain audit",
+      "type": "shell",
+      "command": "python3 scripts/domain-readonly-audit.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Brain: provider usage report",
+      "type": "shell",
+      "command": "python3 scripts/provider-usage-report.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "GitHub: open issues",
+      "type": "shell",
+      "command": "gh issue list --repo cbmagent/cbmagent-brain --limit 30",
+      "problemMatcher": []
+    },
+    {
+      "label": "GitHub: open PRs",
+      "type": "shell",
+      "command": "gh pr list --repo cbmagent/cbmagent-brain --limit 30",
+      "problemMatcher": []
+    }
+  ]
+}
