@@ -7,11 +7,30 @@
     {
       "name": "clarkemoyer.com",
       "path": "../../clarkemoyer.com"
+    },
+    {
+      "name": "technologyadoptionbarriers.org (clone when local)",
+      "path": "../../technologyadoptionbarriers.org"
+    },
+    {
+      "name": "FFC Single Page Template (clone when local)",
+      "path": "../../FFC-IN-FFC_Single_Page_Template"
+    },
+    {
+      "name": "FFC Footer Only Template (clone when local)",
+      "path": "../../FFC-IN-Footer_Only_Template"
+    },
+    {
+      "name": "FFC Cloudflare Automation (clone when local)",
+      "path": "../../FFC-Cloudflare-Automation"
     }
   ],
   "settings": {
     "terminal.integrated.defaultProfile.linux": "bash",
-    "git.autofetch": true
+    "git.autofetch": true,
+    "files.exclude": {
+      "**/.git": false
+    }
   },
   "extensions": {
     "recommendations": [

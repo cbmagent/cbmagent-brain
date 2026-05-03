@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "GitHub.vscode-pull-request-github",
+    "GitHub.vscode-github-actions",
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "DavidAnson.vscode-markdownlint",
+    "redhat.vscode-yaml",
+    "esbenp.prettier-vscode",
+    "ms-playwright.playwright"
+  ]
+}
