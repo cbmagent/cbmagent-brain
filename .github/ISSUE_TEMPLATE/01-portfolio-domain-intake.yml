@@ -1,0 +1,49 @@
+name: '01. Portfolio Domain Intake / Audit'
+description: Add or audit a domain in the cbmagent portfolio.
+title: '[DOMAIN INTAKE] {domain}'
+labels: ['portfolio', 'domain-inventory', 'readonly', 'status:agent-ready']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for domain inventory, DNS/HTTP audits, redirect classification, and GitHub Pages readiness.
+  - type: input
+    id: domain
+    attributes:
+      label: Domain
+      description: Apex domain, no protocol or path.
+      placeholder: example.com
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Domain role
+      options:
+        - canonical-site
+        - redirect-only
+        - staging/subdomain
+        - unknown-audit-needed
+    validations:
+      required: true
+  - type: input
+    id: canonical_target
+    attributes:
+      label: Canonical target if redirect-only
+      placeholder: example.com
+  - type: dropdown
+    id: expected_hosting
+    attributes:
+      label: Expected target hosting
+      options:
+        - github-pages
+        - wordpress-migration-needed
+        - coming-soon-needed
+        - redirect-only-cloudflare
+        - unknown
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes / context

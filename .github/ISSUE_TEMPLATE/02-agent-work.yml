@@ -1,0 +1,36 @@
+name: '02. Agent Work Item'
+description: Track work for Hermes/OpenClaw/Copilot or future agents.
+title: '[AGENT WORK] '
+labels: ['agent-brain', 'status:agent-ready']
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What should the agent accomplish?
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - brain-repo-only
+        - cross-repo-coordination
+        - site-repo-work
+        - read-only-audit
+        - write-gated-prep
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints / safety boundaries
+      value: |
+        - Use issue → branch → PR.
+        - Do not commit secrets.
+        - Production writes require protected GitHub Actions environments.
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of done

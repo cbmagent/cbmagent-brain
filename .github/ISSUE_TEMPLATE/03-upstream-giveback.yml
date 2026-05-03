@@ -1,0 +1,40 @@
+name: '03. Upstream Giveback Candidate'
+description: Track reusable improvements that should flow back to Free For Charity/source repos.
+title: '[UPSTREAM CANDIDATE] '
+labels: ['upstream-candidate', 'nonprofit-giveback']
+body:
+  - type: dropdown
+    id: source_repo
+    attributes:
+      label: Likely upstream repo
+      options:
+        - FreeForCharity/FFC-IN-FFC_Single_Page_Template
+        - FreeForCharity/FFC-IN-Footer_Only_Template
+        - FreeForCharity/FFC-Cloudflare-Automation
+        - clarkemoyer/technologyadoptionbarriers.org
+        - unknown / needs triage
+    validations:
+      required: true
+  - type: textarea
+    id: improvement
+    attributes:
+      label: Reusable improvement
+      description: What did we learn or build that others can reuse?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence / downstream usage
+      description: Link downstream issues, PRs, commits, or sites.
+  - type: dropdown
+    id: proposed_action
+    attributes:
+      label: Proposed upstream action
+      options:
+        - open-upstream-issue
+        - open-upstream-pr
+        - document-pattern-only
+        - not-reusable-after-review
+    validations:
+      required: true

@@ -1,0 +1,99 @@
+# cbmagent portfolio domain registry
+# Generated as an initial inventory. Status fields should be updated by read-only DNS/HTTP audits.
+
+default_policy:
+  dot_com_dot_org_pairs: ".com is canonical; .org redirects to .com via Cloudflare unless explicitly overridden"
+  misspellings: "redirect to canonical domain via Cloudflare"
+  production_writes: "prepared by agents, executed only through protected GitHub Actions environments"
+
+domains:
+  - domain: clarkemoyer.com
+    role: canonical-site
+    target_hosting: github-pages
+    repo: cbmagent/clarkemoyer.com
+    current_state: wordpress-migrating-to-nextjs
+    priority: p0
+    notes: "Personal site; existing Next.js migration in progress."
+  - domain: clarkmoyer.com
+    role: redirect-only
+    canonical_target: clarkemoyer.com
+    target_hosting: cloudflare-redirect
+    priority: p2
+    notes: "Misspelling alias."
+  - domain: completequarters.com
+    role: canonical-site
+    target_hosting: github-pages
+    repo: TBD
+    current_state: audit-needed
+    priority: p2
+  - domain: completequarters.org
+    role: redirect-only
+    canonical_target: completequarters.com
+    target_hosting: cloudflare-redirect
+    priority: p3
+  - domain: moyermanagement.com
+    role: canonical-site
+    target_hosting: github-pages
+    repo: TBD
+    current_state: audit-needed
+    priority: p1
+  - domain: moyermanagement.org
+    role: redirect-only
+    canonical_target: moyermanagement.com
+    target_hosting: cloudflare-redirect
+    priority: p3
+  - domain: moyermanagementsystems.com
+    role: canonical-or-related-site
+    target_hosting: github-pages
+    repo: TBD
+    current_state: audit-needed
+    priority: p2
+  - domain: physicalinvestor.com
+    role: canonical-site
+    target_hosting: github-pages
+    repo: TBD
+    current_state: audit-needed
+    priority: p1
+  - domain: technologyadoptionbarriers.org
+    role: canonical-site
+    target_hosting: github-pages
+    repo: clarkemoyer/technologyadoptionbarriers.org
+    current_state: live-production-reference
+    priority: p0
+    notes: "Advanced automation/API/reference repo."
+  - domain: aprilmoyer.com
+    role: canonical-site
+    target_hosting: github-pages
+    repo: TBD
+    current_state: audit-needed
+    priority: p2
+  - domain: aprilunlimited.com
+    role: canonical-site
+    target_hosting: github-pages
+    repo: TBD
+    current_state: audit-needed
+    priority: p2
+  - domain: darkclouds.us
+    role: canonical-site
+    target_hosting: github-pages
+    repo: TBD
+    current_state: audit-needed
+    priority: p3
+  - domain: focus-on-free.com
+    role: canonical-or-related-site
+    target_hosting: github-pages-or-redirect
+    repo: TBD
+    current_state: audit-needed
+    priority: p2
+  - domain: focusonfree.org
+    role: canonical-or-related-site
+    target_hosting: github-pages-or-redirect
+    repo: TBD
+    current_state: audit-needed
+    priority: p2
+  - domain: focusonfree.us
+    role: canonical-or-related-site
+    target_hosting: github-pages-or-redirect
+    repo: TBD
+    current_state: audit-needed
+    priority: p3
