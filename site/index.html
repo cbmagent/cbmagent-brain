@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cbmagent AI Operations Dashboard</title>
+  <style>
+    :root { color-scheme: dark; --bg:#08111f; --panel:#101d33; --panel2:#132642; --text:#e6edf7; --muted:#9fb2ce; --accent:#6ee7f9; --green:#8ef6b2; --yellow:#ffd166; --red:#ff7b7b; --line:#26415f; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: radial-gradient(circle at top left, #12365c, var(--bg) 45%); color:var(--text); }
+    header { padding:48px 24px 28px; max-width:1200px; margin:auto; }
+    h1 { font-size: clamp(2rem, 5vw, 4.6rem); line-height:1; margin:0 0 16px; letter-spacing:-.06em; }
+    h2 { margin:0 0 14px; font-size:1.5rem; }
+    h3 { margin:18px 0 8px; color:var(--accent); }
+    p, li { color:var(--muted); line-height:1.55; }
+    a { color:var(--accent); }
+    code { background:#07101d; border:1px solid var(--line); border-radius:6px; padding:1px 5px; color:var(--green); }
+    .subtitle { font-size:1.2rem; max-width:880px; color:#c8d6eb; }
+    main { max-width:1200px; margin:auto; padding:0 24px 64px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap:16px; margin:24px 0; }
+    .card { background:rgba(16,29,51,.86); border:1px solid var(--line); border-radius:18px; padding:20px; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+    .metric { font-size:2.4rem; font-weight:800; color:var(--green); letter-spacing:-.05em; }
+    .label { color:var(--muted); font-size:.92rem; }
+    .section { background:rgba(16,29,51,.74); border:1px solid var(--line); border-radius:22px; padding:24px; margin:20px 0; }
+    .tiers { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:16px; }
+    .tier { background:var(--panel2); border:1px solid var(--line); border-radius:18px; padding:18px; }
+    .tier strong { color:#fff; }
+    .badge { display:inline-block; padding:4px 9px; border:1px solid var(--line); border-radius:999px; color:var(--accent); background:#07101d; font-size:.8rem; margin-bottom:8px; }
+    .reports { display:grid; grid-template-columns: 1fr; gap:16px; }
+    details { background:#07101d; border:1px solid var(--line); border-radius:14px; padding:14px 18px; }
+    summary { cursor:pointer; font-weight:700; color:var(--accent); }
+    footer { border-top:1px solid var(--line); padding:24px; color:var(--muted); text-align:center; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="badge">cbmagent-brain • provider-neutral AI control tower</div>
+    <h1>AI Operations Dashboard</h1>
+    <p class="subtitle">A live static dashboard for remembering how this repository works, what the autonomous agent is doing, and how each AI tier/provider should be used.</p>
+    <p>Generated 2026-05-03 22:40 UTC from repository artifacts. No credentials or secret files are read.</p>
+  </header>
+  <main>
+    <section class="grid" aria-label="status metrics">
+      <div class="card"><div class="metric">30</div><div class="label">Open GitHub issues</div></div>
+      <div class="card"><div class="metric">0</div><div class="label">Open pull requests</div></div>
+      <div class="card"><div class="metric">4</div><div class="label">Human-needed blockers</div></div>
+      <div class="card"><div class="metric">15</div><div class="label">Tracked domains</div></div>
+      <div class="card"><div class="metric">45</div><div class="label">Accessible repos inventoried</div></div>
+      <div class="card"><div class="metric">gpt-5.5</div><div class="label">Primary model target</div></div>
+    </section>
+
+    <section class="section">
+      <h2>How we intend to use the AI tiers</h2>
+      <div class="tiers">
+        <div class="tier"><span class="badge">Primary agent engine</span><h3>OpenAI Codex OAuth / GPT-5.5</h3><p><strong>Use for:</strong> main Hermes coding, planning, repo operations, PR creation, scripts, site migrations, and autonomous issue execution.</p><p><strong>Why:</strong> Clarke has approved this as the primary backend via supported OAuth path.</p></div>
+        <div class="tier"><span class="badge">Fallback / background</span><h3>Nous</h3><p><strong>Use for:</strong> ToS-safe fallback inference, background work, and provider resilience when OpenAI/Codex is degraded or quota-constrained.</p><p><strong>Why:</strong> Keeps the system provider-neutral and avoids tying the brain to one backend.</p></div>
+        <div class="tier"><span class="badge">GitHub-native specialist</span><h3>OpenClaw + GitHub Copilot</h3><p><strong>Use for:</strong> GitHub PR review, IDE assistance, Copilot-native review loops, and specialist fallback for GitHub workflows.</p><p><strong>Watch:</strong> cooldown/rate-limit lockouts should be reported and routed around.</p></div>
+        <div class="tier"><span class="badge">Automation cockpit</span><h3>GitHub Actions</h3><p><strong>Use for:</strong> repeatable audits, deployments, validation, GitHub Pages publishing, and environment-gated infrastructure changes.</p><p><strong>Rule:</strong> read-only automation can run freely; production writes require protected environments and approvals.</p></div>
+        <div class="tier"><span class="badge">Human/UI only unless safe API exists</span><h3>Consumer Claude/Gemini/M365 Copilot</h3><p><strong>Use for:</strong> human-interactive thinking and manual workflows.</p><p><strong>Do not use for:</strong> bot backends unless a supported programmatic API/OAuth path is confirmed.</p></div>
+        <div class="tier"><span class="badge">Local/private utility</span><h3>Ollama / local tools</h3><p><strong>Use for:</strong> cheap/private preprocessing, simple transformations, and future local fallback where quality is sufficient.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Repository operating model</h2>
+      <p><strong>cbmagent-brain</strong> is the control tower: standards, portfolio inventory, runbooks, dashboards, reports, provider health, and cross-repo links. It should not swallow project-specific management.</p>
+      <p>Each site repo owns its own issues, PRs, Actions, GitHub Pages deployment, environments, branch protections, and cutover history. Standard work remains: issue → branch → PR → validation/review → merge → update status.</p>
+    </section>
+
+    <section class="section reports">
+      <h2>Live repository reports</h2>
+      <details open><summary>Progress report</summary><h1>Autonomous Progress Report</h1>
+<p>Generated: <code>2026-05-03T22-03-52Z</code></p>
+<h2>Summary</h2>
+<ul>
+<li>Open issues: 30</li>
+<li>Open PRs: 0</li>
+<li>Human-needed blockers: 4</li>
+<li>Next safe agent tasks listed: 10</li>
+</ul>
+<h2>Open PRs</h2>
+<p>None.</p>
+<h2>Recently Merged PRs</h2>
+<ul>
+<li>#48 <a href="https://github.com/cbmagent/cbmagent-brain/pull/48">ci: validate brain repo artifacts</a></li>
+<li>#47 <a href="https://github.com/cbmagent/cbmagent-brain/pull/47">feat: add GitHub repo discovery report</a></li>
+<li>#46 <a href="https://github.com/cbmagent/cbmagent-brain/pull/46">docs: add autonomous roadmap and operating loop</a></li>
+<li>#12 <a href="https://github.com/cbmagent/cbmagent-brain/pull/12">docs: add nonprofit giveback alignment tracker</a></li>
+<li>#11 <a href="https://github.com/cbmagent/cbmagent-brain/pull/11">docs: add read-only/write-gated environment rollout</a></li>
+<li>#10 <a href="https://github.com/cbmagent/cbmagent-brain/pull/10">feat: add VS Code operator workspace tasks</a></li>
+<li>#9 <a href="https://github.com/cbmagent/cbmagent-brain/pull/9">feat: add provider usage report v0</a></li>
+<li>#8 <a href="https://github.com/cbmagent/cbmagent-brain/pull/8">feat: add first read-only domain audit</a></li>
+<li>#2 <a href="https://github.com/cbmagent/cbmagent-brain/pull/2">docs: add portfolio standards and issue templates</a></li>
+</ul>
+<h2>Next Safe Agent Tasks</h2>
+<ul>
+<li>#22 <a href="https://github.com/cbmagent/cbmagent-brain/issues/22">EPIC: Free For Charity upstream giveback loop</a> — nonprofit-giveback, tabs-alignment, epic, priority:critical</li>
+<li>#20 <a href="https://github.com/cbmagent/cbmagent-brain/issues/20">EPIC: Provider usage, quota, routing, and fallback reporting</a> — provider-usage, epic, priority:critical, openclaw, hermes, nous</li>
+<li>#18 <a href="https://github.com/cbmagent/cbmagent-brain/issues/18">EPIC: Cloudflare read-only and production write-gated workflows</a> — cloudflare, readonly, write-gated, epic, priority:critical, security</li>
+<li>#15 <a href="https://github.com/cbmagent/cbmagent-brain/issues/15">EPIC: GitHub repository discovery and site repo mapping</a> — github-pages, epic, priority:critical, repo-discovery</li>
+<li>#14 <a href="https://github.com/cbmagent/cbmagent-brain/issues/14">EPIC: Portfolio domain inventory and DNS/HTTP audit automation</a> — github-pages, cloudflare, readonly, epic, priority:critical, domain-audit</li>
+<li>#45 <a href="https://github.com/cbmagent/cbmagent-brain/issues/45">Create autonomous progress report generator</a> — priority:high, workflow, hermes</li>
+<li>#41 <a href="https://github.com/cbmagent/cbmagent-brain/issues/41">Create Hermes provider/model verification workflow</a> — provider-usage, priority:high, hermes</li>
+<li>#40 <a href="https://github.com/cbmagent/cbmagent-brain/issues/40">Create OpenClaw health and cooldown monitor</a> — provider-usage, priority:high, openclaw</li>
+<li>#37 <a href="https://github.com/cbmagent/cbmagent-brain/issues/37">Build GitHub Pages readiness checker</a> — github-pages, readonly, priority:high, domain-audit</li>
+<li>#36 <a href="https://github.com/cbmagent/cbmagent-brain/issues/36">Create per-domain issue set from domains.yaml</a> — priority:high, domain-audit, site-migration</li>
+</ul>
+<h2>Human Needed</h2>
+<ul>
+<li>#32 <a href="https://github.com/cbmagent/cbmagent-brain/issues/32">Create human-needed setup issue: Google read-only credentials</a> — google, readonly, priority:medium, security, human-needed</li>
+<li>#31 <a href="https://github.com/cbmagent/cbmagent-brain/issues/31">Create human-needed setup issue: Microsoft read-only domain app</a> — microsoft, readonly, priority:medium, security, human-needed</li>
+<li>#30 <a href="https://github.com/cbmagent/cbmagent-brain/issues/30">Create human-needed setup issue: Cloudflare production DNS write token</a> — cloudflare, write-gated, priority:high, security, human-needed</li>
+<li>#29 <a href="https://github.com/cbmagent/cbmagent-brain/issues/29">Create human-needed setup issue: Cloudflare read-only token</a> — cloudflare, readonly, priority:critical, security, human-needed</li>
+</ul>
+<h2>Operating Note</h2>
+<p>The agent should keep taking <code>priority:critical</code>/<code>priority:high</code> issues that are not <code>human-needed</code> or <code>blocked</code>, create branches/PRs, validate, merge when safe, and only text Clarke for external credentials, approvals, production cutovers, or ambiguous decisions.</p></details>
+      <details><summary>Provider usage / health report</summary><h1>Provider Usage and Health Report</h1>
+<p>Generated UTC: <code>2026-05-03T21-36-23Z</code></p>
+<p>This report is redacted. It does not intentionally print tokens, API keys, bearer values, or credential files.</p>
+<h2>Summary</h2>
+<ul>
+<li>Hermes status command: <code>ok</code></li>
+<li>OpenClaw gateway root: <code>ok</code> 200</li>
+<li>GitHub CLI auth: <code>ok</code></li>
+</ul>
+<h2>Current Config Signals</h2>
+<pre><code>
+◆ Model
+  Model:        {&#x27;default&#x27;: &#x27;gpt-5.5&#x27;, &#x27;provider&#x27;: &#x27;openai-codex&#x27;}
+  Model:        (auto)
+
+</code></pre>
+<h2>Auth/Provider Names</h2>
+<pre><code>
+copilot (1 credentials):
+  #1  gh auth [REDACTED]
+
+nous (1 credentials):
+  #1  device_code          oauth   device_code ←
+
+openai-codex (1 credentials):
+  #1  openai-codex-oauth-1 oauth   device_code ←
+
+
+</code></pre>
+<h2>Recent GitHub Actions</h2>
+<pre><code>
+No runs found or command unavailable.
+</code></pre>
+<h2>Recent Rate Limit / Cooldown Signals</h2>
+<h3>hermes_agent_log</h3>
+<ul>
+<li><code>2026-05-03 16:18:44,636 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)</code></li>
+<li><code>2026-05-03 16:18:44,648 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)</code></li>
+<li><code>2026-05-03 16:18:44,661 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)</code></li>
+<li><code>2026-05-03 16:18:44,674 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)</code></li>
+<li><code>2026-05-03 16:42:44,777 ERROR tools.vision_tools: Error analyzing image: Invalid image source. Provide an HTTP/HTTPS URL or a valid local file path.</code></li>
+<li><code>    raise ValueError(</code></li>
+<li><code>ValueError: Invalid image source. Provide an HTTP/HTTPS URL or a valid local file path.</code></li>
+<li><code>2026-05-03 16:51:23,496 INFO [20260503_155326_4b62db] agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)</code></li>
+<li><code>2026-05-03 16:57:07,398 INFO agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)</code></li>
+<li><code>2026-05-03 17:25:50,280 INFO agent.auxiliary_client: Auxiliary auto-detect: using main provider openai-codex (gpt-5.5)</code></li>
+</ul>
+<h3>hermes_gateway_log</h3>
+<ul>
+<li><code>2026-05-03 02:13:22,974 WARNING gateway.platforms.telegram: [Telegram] Connect attempt 1/8 failed: httpx.ConnectError: All connection attempts failed — retrying in 1s</code></li>
+<li><code>2026-05-03 02:13:23,979 WARNING gateway.platforms.telegram: [Telegram] Connect attempt 2/8 failed: httpx.ConnectError: All connection attempts failed — retrying in 2s</code></li>
+<li><code>2026-05-03 10:17:06,471 WARNING gateway.platforms.telegram: [Telegram] Connect attempt 1/8 failed: httpx.ConnectError: All connection attempts failed — retrying in 1s</code></li>
+<li><code>2026-05-03 10:17:07,475 WARNING gateway.platforms.telegram: [Telegram] Connect attempt 2/8 failed: httpx.ConnectError: All connection attempts failed — retrying in 2s</code></li>
+<li><code>2026-05-03 14:29:23,757 WARNING gateway.platforms.telegram: [Telegram] Telegram network error, scheduling reconnect: httpx.ReadError: </code></li>
+<li><code>2026-05-03 14:29:23,757 WARNING gateway.platforms.telegram: [Telegram] Telegram network error (attempt 1/10), reconnecting in 5s. Error: httpx.ReadError: </code></li>
+<li><code>2026-05-03 14:29:30,125 INFO gateway.platforms.telegram: [Telegram] Telegram polling resumed after network error (attempt 1)</code></li>
+<li><code>2026-05-03 15:04:18,542 INFO gateway.run: inbound message: platform=telegram user=cbm agent chat=8742801497 msg=&#x27;Im getting this error on my session with openclaw ⚠️ Something went wrong while &#x27;</code></li>
+</ul>
+<h2>Recommendations</h2>
+<ul>
+<li>Treat OpenAI Codex OAuth quota as opaque; monitor observed rate-limit/cooldown errors.</li>
+<li>Use Nous/OpenClaw/local tools as fallback/specialists when primary provider signals failures.</li>
+<li>Keep deterministic audits in scripts/GitHub Actions so premium model quota is reserved for reasoning/coding.</li>
+<li>Add scheduled provider report workflow after read-only environment design is finalized.</li>
+</ul></details>
+      <details><summary>Repository inventory</summary><h1>Repository Discovery Report</h1>
+<p>Generated: <code>2026-05-03T21-57-12Z</code></p>
+<h2>Owner Access</h2>
+<ul>
+<li><code>cbmagent</code>: 2 repos</li>
+<li><code>clarkemoyer</code>: 8 repos</li>
+<li><code>FreeForCharity</code>: 35 repos</li>
+</ul>
+<h2>Domain Mapping</h2>
+<h3>clarkemoyer.com</h3>
+<ul>
+<li>role: <code>canonical-site</code></li>
+<li>priority: <code>p0</code></li>
+<li>declared repo: <code>cbmagent/clarkemoyer.com</code></li>
+<li>status: <code>declared-repo-not-accessible-or-not-found</code></li>
+<li>top matches:</li>
+</ul>
+<p>  - <a href="https://github.com/clarkemoyer/clarkemoyer.com">clarkemoyer/clarkemoyer.com</a> — score 275; description contains domain, homepage contains domain, repo name contains domain stem, repo name matches domain</p>
+<p>  - <a href="https://github.com/clarkemoyer/clarkemoyer">clarkemoyer/clarkemoyer</a> — score 80; repo name matches domain</p>
+<p>  - <a href="https://github.com/clarkemoyer/clarkemoyer-html">clarkemoyer/clarkemoyer-html</a> — score 75; description contains domain, repo name contains domain stem</p>
+<h3>clarkmoyer.com</h3>
+<ul>
+<li>role: <code>redirect-only</code></li>
+<li>priority: <code>p2</code></li>
+<li>declared repo: <code>None</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>completequarters.com</h3>
+<ul>
+<li>role: <code>canonical-site</code></li>
+<li>priority: <code>p2</code></li>
+<li>declared repo: <code>TBD</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>completequarters.org</h3>
+<ul>
+<li>role: <code>redirect-only</code></li>
+<li>priority: <code>p3</code></li>
+<li>declared repo: <code>None</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>moyermanagement.com</h3>
+<ul>
+<li>role: <code>canonical-site</code></li>
+<li>priority: <code>p1</code></li>
+<li>declared repo: <code>TBD</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>moyermanagement.org</h3>
+<ul>
+<li>role: <code>redirect-only</code></li>
+<li>priority: <code>p3</code></li>
+<li>declared repo: <code>None</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>moyermanagementsystems.com</h3>
+<ul>
+<li>role: <code>canonical-or-related-site</code></li>
+<li>priority: <code>p2</code></li>
+<li>declared repo: <code>TBD</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>physicalinvestor.com</h3>
+<ul>
+<li>role: <code>canonical-site</code></li>
+<li>priority: <code>p1</code></li>
+<li>declared repo: <code>TBD</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>technologyadoptionbarriers.org</h3>
+<ul>
+<li>role: <code>canonical-site</code></li>
+<li>priority: <code>p0</code></li>
+<li>declared repo: <code>clarkemoyer/technologyadoptionbarriers.org</code></li>
+<li>status: <code>mapped</code></li>
+<li>top matches:</li>
+</ul>
+<p>  - <a href="https://github.com/clarkemoyer/technologyadoptionbarriers.org">clarkemoyer/technologyadoptionbarriers.org</a> — score 230; declared repo exact match, repo name contains domain stem, repo name matches domain</p>
+<h3>aprilmoyer.com</h3>
+<ul>
+<li>role: <code>canonical-site</code></li>
+<li>priority: <code>p2</code></li>
+<li>declared repo: <code>TBD</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>aprilunlimited.com</h3>
+<ul>
+<li>role: <code>canonical-site</code></li>
+<li>priority: <code>p2</code></li>
+<li>declared repo: <code>TBD</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>darkclouds.us</h3>
+<ul>
+<li>role: <code>canonical-site</code></li>
+<li>priority: <code>p3</code></li>
+<li>declared repo: <code>TBD</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>focus-on-free.com</h3>
+<ul>
+<li>role: <code>canonical-or-related-site</code></li>
+<li>priority: <code>p2</code></li>
+<li>declared repo: <code>TBD</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>focusonfree.org</h3>
+<ul>
+<li>role: <code>canonical-or-related-site</code></li>
+<li>priority: <code>p2</code></li>
+<li>declared repo: <code>TBD</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h3>focusonfree.us</h3>
+<ul>
+<li>role: <code>canonical-or-related-site</code></li>
+<li>priority: <code>p3</code></li>
+<li>declared repo: <code>TBD</code></li>
+<li>status: <code>missing-or-unknown</code></li>
+<li>top matches: none</li>
+</ul>
+<h2>Missing / Unknown Canonical Domains</h2>
+<ul>
+<li><code>completequarters.com</code></li>
+<li><code>moyermanagement.com</code></li>
+<li><code>moyermanagementsystems.com</code></li>
+<li><code>physicalinvestor.com</code></li>
+<li><code>aprilmoyer.com</code></li>
+<li><code>aprilunlimited.com</code></li>
+<li><code>darkclouds.us</code></li>
+<li><code>focus-on-free.com</code></li>
+<li><code>focusonfree.org</code></li>
+<li><code>focusonfree.us</code></li>
+</ul></details>
+      <details><summary>Domain DNS/HTTP audit</summary><h1>Read-Only Domain Audit</h1>
+<p>Generated UTC: <code>2026-05-03T21-34-18Z</code></p>
+<p>This audit used public DNS and HTTP(S) checks only. It did not mutate any provider state.</p>
+<h2>Summary</h2>
+<ul>
+<li>**aprilmoyer.com**: <code>no-apex-records-detected</code>; HTTPS <code>None</code> → <code>https://aprilmoyer.com/</code></li>
+<li>**aprilunlimited.com**: <code>wordpress-detected</code>; HTTPS <code>200</code> → <code>https://aprilunlimited.com/</code></li>
+<li>**clarkemoyer.com**: <code>github-pages-detected</code>; HTTPS <code>200</code> → <code>https://clarkemoyer.com/</code></li>
+<li>**clarkmoyer.com**: <code>redirect-only-candidate</code>; HTTPS <code>200</code> → <code>https://clarkemoyer.com/</code></li>
+<li>**completequarters.com**: <code>no-apex-records-detected</code>; HTTPS <code>None</code> → <code>https://completequarters.com/</code></li>
+<li>**completequarters.org**: <code>redirect-only-candidate</code>; HTTPS <code>None</code> → <code>https://completequarters.org/</code></li>
+<li>**darkclouds.us**: <code>no-apex-records-detected</code>; HTTPS <code>None</code> → <code>https://darkclouds.us/</code></li>
+<li>**focus-on-free.com**: <code>wordpress-detected</code>; HTTPS <code>200</code> → <code>https://focus-on-free.com/</code></li>
+<li>**focusonfree.org**: <code>dns-present-http-issue</code>; HTTPS <code>403</code> → <code>https://focusonfree.org/</code></li>
+<li>**focusonfree.us**: <code>dns-present-http-issue</code>; HTTPS <code>403</code> → <code>https://focusonfree.us/</code></li>
+<li>**moyermanagement.com**: <code>wordpress-detected</code>; HTTPS <code>200</code> → <code>https://moyermanagement.com/</code></li>
+<li>**moyermanagement.org**: <code>redirect-only-candidate</code>; HTTPS <code>None</code> → <code>https://moyermanagement.org/</code></li>
+<li>**moyermanagementsystems.com**: <code>no-apex-records-detected</code>; HTTPS <code>None</code> → <code>https://moyermanagementsystems.com/</code></li>
+<li>**physicalinvestor.com**: <code>dns-present-http-issue</code>; HTTPS <code>403</code> → <code>https://physicalinvestor.com/</code></li>
+<li>**technologyadoptionbarriers.org**: <code>github-pages-detected</code>; HTTPS <code>200</code> → <code>https://technologyadoptionbarriers.org/</code></li>
+</ul>
+<h2>Details</h2>
+<h3>aprilmoyer.com</h3>
+<ul>
+<li>Role: <code>canonical-site</code></li>
+<li>Target hosting: <code>github-pages</code></li>
+<li>Repo: <code>TBD</code></li>
+<li>Classification: <code>no-apex-records-detected</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>none</code></li>
+<li>AAAA: <code>none</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>None</code> <code>https://aprilmoyer.com/</code> <code>URLError: &lt;urlopen error [Errno -2] Name or service not known&gt;</code></li>
+<li>HTTP: <code>None</code> <code>http://aprilmoyer.com/</code> <code>URLError: &lt;urlopen error [Errno -2] Name or service not known&gt;</code></li>
+</ul>
+<h3>aprilunlimited.com</h3>
+<ul>
+<li>Role: <code>canonical-site</code></li>
+<li>Target hosting: <code>github-pages</code></li>
+<li>Repo: <code>TBD</code></li>
+<li>Classification: <code>wordpress-detected</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>104.21.30.239, 172.67.174.48</code></li>
+<li>AAAA: <code>2606:4700:3036::6815:1eef, 2606:4700:3036::ac43:ae30</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>200</code> <code>https://aprilunlimited.com/</code> ``</li>
+<li>HTTP: <code>200</code> <code>https://aprilunlimited.com/</code> ``</li>
+</ul>
+<h3>clarkemoyer.com</h3>
+<ul>
+<li>Role: <code>canonical-site</code></li>
+<li>Target hosting: <code>github-pages</code></li>
+<li>Repo: <code>cbmagent/clarkemoyer.com</code></li>
+<li>Classification: <code>github-pages-detected</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>185.199.111.153, 185.199.108.153, 185.199.110.153, 185.199.109.153</code></li>
+<li>AAAA: <code>2606:50c0:8000::153, 2606:50c0:8003::153, 2606:50c0:8002::153, 2606:50c0:8001::153</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>clarkemoyer.github.io</code></li>
+<li>HTTPS: <code>200</code> <code>https://clarkemoyer.com/</code> ``</li>
+<li>HTTP: <code>200</code> <code>https://clarkemoyer.com/</code> ``</li>
+</ul>
+<h3>clarkmoyer.com</h3>
+<ul>
+<li>Role: <code>redirect-only</code></li>
+<li>Target hosting: <code>cloudflare-redirect</code></li>
+<li>Repo: <code>None</code></li>
+<li>Classification: <code>redirect-only-candidate</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>172.67.143.213, 104.21.95.81</code></li>
+<li>AAAA: <code>2606:4700:3034::6815:5f51, 2606:4700:3034::ac43:8fd5</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>200</code> <code>https://clarkemoyer.com/</code> ``</li>
+<li>HTTP: <code>200</code> <code>https://clarkemoyer.com/</code> ``</li>
+</ul>
+<h3>completequarters.com</h3>
+<ul>
+<li>Role: <code>canonical-site</code></li>
+<li>Target hosting: <code>github-pages</code></li>
+<li>Repo: <code>TBD</code></li>
+<li>Classification: <code>no-apex-records-detected</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>none</code></li>
+<li>AAAA: <code>none</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>None</code> <code>https://completequarters.com/</code> <code>URLError: &lt;urlopen error [Errno -2] Name or service not known&gt;</code></li>
+<li>HTTP: <code>None</code> <code>http://completequarters.com/</code> <code>URLError: &lt;urlopen error [Errno -2] Name or service not known&gt;</code></li>
+</ul>
+<h3>completequarters.org</h3>
+<ul>
+<li>Role: <code>redirect-only</code></li>
+<li>Target hosting: <code>cloudflare-redirect</code></li>
+<li>Repo: <code>None</code></li>
+<li>Classification: <code>redirect-only-candidate</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>none</code></li>
+<li>AAAA: <code>none</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>None</code> <code>https://completequarters.org/</code> <code>URLError: &lt;urlopen error [Errno -2] Name or service not known&gt;</code></li>
+<li>HTTP: <code>None</code> <code>http://completequarters.org/</code> <code>URLError: &lt;urlopen error [Errno -2] Name or service not known&gt;</code></li>
+</ul>
+<h3>darkclouds.us</h3>
+<ul>
+<li>Role: <code>canonical-site</code></li>
+<li>Target hosting: <code>github-pages</code></li>
+<li>Repo: <code>TBD</code></li>
+<li>Classification: <code>no-apex-records-detected</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>none</code></li>
+<li>AAAA: <code>none</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>None</code> <code>https://darkclouds.us/</code> <code>URLError: &lt;urlopen error [Errno -2] Name or service not known&gt;</code></li>
+<li>HTTP: <code>None</code> <code>http://darkclouds.us/</code> <code>URLError: &lt;urlopen error [Errno -2] Name or service not known&gt;</code></li>
+</ul>
+<h3>focus-on-free.com</h3>
+<ul>
+<li>Role: <code>canonical-or-related-site</code></li>
+<li>Target hosting: <code>github-pages-or-redirect</code></li>
+<li>Repo: <code>TBD</code></li>
+<li>Classification: <code>wordpress-detected</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>104.21.87.115, 172.67.143.6</code></li>
+<li>AAAA: <code>2606:4700:3030::6815:5773, 2606:4700:3032::ac43:8f06</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>200</code> <code>https://focus-on-free.com/</code> ``</li>
+<li>HTTP: <code>200</code> <code>https://focus-on-free.com/</code> ``</li>
+</ul>
+<h3>focusonfree.org</h3>
+<ul>
+<li>Role: <code>canonical-or-related-site</code></li>
+<li>Target hosting: <code>github-pages-or-redirect</code></li>
+<li>Repo: <code>TBD</code></li>
+<li>Classification: <code>dns-present-http-issue</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>104.21.21.230, 172.67.200.242</code></li>
+<li>AAAA: <code>2606:4700:3032::6815:15e6, 2606:4700:3034::ac43:c8f2</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>403</code> <code>https://focusonfree.org/</code> <code>HTTP Error 403: Forbidden</code></li>
+<li>HTTP: <code>403</code> <code>http://focusonfree.org/</code> <code>HTTP Error 403: Forbidden</code></li>
+</ul>
+<h3>focusonfree.us</h3>
+<ul>
+<li>Role: <code>canonical-or-related-site</code></li>
+<li>Target hosting: <code>github-pages-or-redirect</code></li>
+<li>Repo: <code>TBD</code></li>
+<li>Classification: <code>dns-present-http-issue</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>172.67.176.160, 104.21.80.88</code></li>
+<li>AAAA: <code>2606:4700:3033::ac43:b0a0, 2606:4700:3033::6815:5058</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>403</code> <code>https://focusonfree.us/</code> <code>HTTP Error 403: Forbidden</code></li>
+<li>HTTP: <code>403</code> <code>http://focusonfree.us/</code> <code>HTTP Error 403: Forbidden</code></li>
+</ul>
+<h3>moyermanagement.com</h3>
+<ul>
+<li>Role: <code>canonical-site</code></li>
+<li>Target hosting: <code>github-pages</code></li>
+<li>Repo: <code>TBD</code></li>
+<li>Classification: <code>wordpress-detected</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>172.67.135.216, 104.21.26.99</code></li>
+<li>AAAA: <code>2606:4700:3037::ac43:87d8, 2606:4700:3033::6815:1a63</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>200</code> <code>https://moyermanagement.com/</code> ``</li>
+<li>HTTP: <code>200</code> <code>https://moyermanagement.com/</code> ``</li>
+</ul>
+<h3>moyermanagement.org</h3>
+<ul>
+<li>Role: <code>redirect-only</code></li>
+<li>Target hosting: <code>cloudflare-redirect</code></li>
+<li>Repo: <code>None</code></li>
+<li>Classification: <code>redirect-only-candidate</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>172.67.145.29, 104.21.63.94</code></li>
+<li>AAAA: <code>2606:4700:3030::6815:3f5e, 2606:4700:3034::ac43:911d</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>None</code> <code>https://moyermanagement.org/</code> <code>TimeoutError: The read operation timed out</code></li>
+<li>HTTP: <code>None</code> <code>http://moyermanagement.org/</code> <code>TimeoutError: The read operation timed out</code></li>
+</ul>
+<h3>moyermanagementsystems.com</h3>
+<ul>
+<li>Role: <code>canonical-or-related-site</code></li>
+<li>Target hosting: <code>github-pages</code></li>
+<li>Repo: <code>TBD</code></li>
+<li>Classification: <code>no-apex-records-detected</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>none</code></li>
+<li>AAAA: <code>none</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>None</code> <code>https://moyermanagementsystems.com/</code> <code>URLError: &lt;urlopen error [Errno -2] Name or service not known&gt;</code></li>
+<li>HTTP: <code>None</code> <code>http://moyermanagementsystems.com/</code> <code>URLError: &lt;urlopen error [Errno -2] Name or service not known&gt;</code></li>
+</ul>
+<h3>physicalinvestor.com</h3>
+<ul>
+<li>Role: <code>canonical-site</code></li>
+<li>Target hosting: <code>github-pages</code></li>
+<li>Repo: <code>TBD</code></li>
+<li>Classification: <code>dns-present-http-issue</code></li>
+<li>NS: <code>cody.ns.cloudflare.com, lisa.ns.cloudflare.com</code></li>
+<li>A: <code>172.67.172.185, 104.21.30.98</code></li>
+<li>AAAA: <code>2606:4700:3033::ac43:acb9, 2606:4700:3032::6815:1e62</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>none</code></li>
+<li>HTTPS: <code>403</code> <code>https://physicalinvestor.com/</code> <code>HTTP Error 403: Forbidden</code></li>
+<li>HTTP: <code>403</code> <code>http://physicalinvestor.com/</code> <code>HTTP Error 403: Forbidden</code></li>
+</ul>
+<h3>technologyadoptionbarriers.org</h3>
+<ul>
+<li>Role: <code>canonical-site</code></li>
+<li>Target hosting: <code>github-pages</code></li>
+<li>Repo: <code>clarkemoyer/technologyadoptionbarriers.org</code></li>
+<li>Classification: <code>github-pages-detected</code></li>
+<li>NS: <code>ns1.freeforcharity.org, ns2.freeforcharity.org</code></li>
+<li>A: <code>185.199.110.153, 185.199.111.153, 185.199.108.153, 185.199.109.153</code></li>
+<li>AAAA: <code>2606:50c0:8001::153, 2606:50c0:8000::153, 2606:50c0:8002::153, 2606:50c0:8003::153</code></li>
+<li>CNAME apex: <code>none</code></li>
+<li>www CNAME: <code>clarkemoyer.github.io</code></li>
+<li>HTTPS: <code>200</code> <code>https://technologyadoptionbarriers.org/</code> ``</li>
+<li>HTTP: <code>200</code> <code>https://technologyadoptionbarriers.org/</code> ``</li>
+</ul></details>
+    </section>
+
+    <section class="section">
+      <h2>Key links</h2>
+      <ul>
+        <li><a href="https://github.com/cbmagent/cbmagent-brain">GitHub repository</a></li>
+        <li><a href="https://github.com/cbmagent/cbmagent-brain/issues">Issue backlog</a></li>
+        <li><a href="https://github.com/cbmagent/cbmagent-brain/pulls">Pull requests</a></li>
+        <li><a href="https://github.com/cbmagent/cbmagent-brain/actions">GitHub Actions</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer>Built from cbmagent-brain. Provider-neutral, secret-safe, GitHub-native.</footer>
+</body>
+</html>
