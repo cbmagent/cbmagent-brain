@@ -1,0 +1,594 @@
+{
+  "domains": [
+    {
+      "a": [],
+      "aaaa": [],
+      "canonical_target": null,
+      "classification": "no-apex-records-detected",
+      "cname": [],
+      "domain": "aprilmoyer.com",
+      "http": {
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "final_url": "http://aprilmoyer.com/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "https": {
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "final_url": "https://aprilmoyer.com/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": "TBD",
+      "role": "canonical-site",
+      "target_hosting": "github-pages",
+      "www_a": [],
+      "www_cname": []
+    },
+    {
+      "a": [
+        "104.21.30.239",
+        "172.67.174.48"
+      ],
+      "aaaa": [
+        "2606:4700:3036::6815:1eef",
+        "2606:4700:3036::ac43:ae30"
+      ],
+      "canonical_target": null,
+      "classification": "wordpress-detected",
+      "cname": [],
+      "domain": "aprilunlimited.com",
+      "http": {
+        "final_url": "https://aprilunlimited.com/",
+        "ok": true,
+        "server": "cloudflare",
+        "signals": [
+          "cloudflare",
+          "wordpress"
+        ],
+        "status": 200
+      },
+      "https": {
+        "final_url": "https://aprilunlimited.com/",
+        "ok": true,
+        "server": "cloudflare",
+        "signals": [
+          "cloudflare",
+          "wordpress"
+        ],
+        "status": 200
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": "TBD",
+      "role": "canonical-site",
+      "target_hosting": "github-pages",
+      "www_a": [
+        "172.67.174.48",
+        "104.21.30.239"
+      ],
+      "www_cname": []
+    },
+    {
+      "a": [
+        "185.199.111.153",
+        "185.199.108.153",
+        "185.199.110.153",
+        "185.199.109.153"
+      ],
+      "aaaa": [
+        "2606:50c0:8000::153",
+        "2606:50c0:8003::153",
+        "2606:50c0:8002::153",
+        "2606:50c0:8001::153"
+      ],
+      "canonical_target": null,
+      "classification": "github-pages-detected",
+      "cname": [],
+      "domain": "clarkemoyer.com",
+      "http": {
+        "final_url": "https://clarkemoyer.com/",
+        "ok": true,
+        "server": "GitHub.com",
+        "signals": [],
+        "status": 200
+      },
+      "https": {
+        "final_url": "https://clarkemoyer.com/",
+        "ok": true,
+        "server": "GitHub.com",
+        "signals": [],
+        "status": 200
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": "cbmagent/clarkemoyer.com",
+      "role": "canonical-site",
+      "target_hosting": "github-pages",
+      "www_a": [
+        "clarkemoyer.github.io",
+        "185.199.108.153",
+        "185.199.109.153",
+        "185.199.110.153",
+        "185.199.111.153"
+      ],
+      "www_cname": [
+        "clarkemoyer.github.io"
+      ]
+    },
+    {
+      "a": [
+        "172.67.143.213",
+        "104.21.95.81"
+      ],
+      "aaaa": [
+        "2606:4700:3034::6815:5f51",
+        "2606:4700:3034::ac43:8fd5"
+      ],
+      "canonical_target": "clarkemoyer.com",
+      "classification": "redirect-only-candidate",
+      "cname": [],
+      "domain": "clarkmoyer.com",
+      "http": {
+        "final_url": "https://clarkemoyer.com/",
+        "ok": true,
+        "server": "GitHub.com",
+        "signals": [],
+        "status": 200
+      },
+      "https": {
+        "final_url": "https://clarkemoyer.com/",
+        "ok": true,
+        "server": "GitHub.com",
+        "signals": [],
+        "status": 200
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": null,
+      "role": "redirect-only",
+      "target_hosting": "cloudflare-redirect",
+      "www_a": [
+        "104.21.95.81",
+        "172.67.143.213"
+      ],
+      "www_cname": []
+    },
+    {
+      "a": [],
+      "aaaa": [],
+      "canonical_target": null,
+      "classification": "no-apex-records-detected",
+      "cname": [],
+      "domain": "completequarters.com",
+      "http": {
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "final_url": "http://completequarters.com/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "https": {
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "final_url": "https://completequarters.com/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": "TBD",
+      "role": "canonical-site",
+      "target_hosting": "github-pages",
+      "www_a": [],
+      "www_cname": []
+    },
+    {
+      "a": [],
+      "aaaa": [],
+      "canonical_target": "completequarters.com",
+      "classification": "redirect-only-candidate",
+      "cname": [],
+      "domain": "completequarters.org",
+      "http": {
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "final_url": "http://completequarters.org/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "https": {
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "final_url": "https://completequarters.org/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": null,
+      "role": "redirect-only",
+      "target_hosting": "cloudflare-redirect",
+      "www_a": [],
+      "www_cname": []
+    },
+    {
+      "a": [],
+      "aaaa": [],
+      "canonical_target": null,
+      "classification": "no-apex-records-detected",
+      "cname": [],
+      "domain": "darkclouds.us",
+      "http": {
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "final_url": "http://darkclouds.us/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "https": {
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "final_url": "https://darkclouds.us/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": "TBD",
+      "role": "canonical-site",
+      "target_hosting": "github-pages",
+      "www_a": [],
+      "www_cname": []
+    },
+    {
+      "a": [
+        "104.21.87.115",
+        "172.67.143.6"
+      ],
+      "aaaa": [
+        "2606:4700:3030::6815:5773",
+        "2606:4700:3032::ac43:8f06"
+      ],
+      "canonical_target": null,
+      "classification": "wordpress-detected",
+      "cname": [],
+      "domain": "focus-on-free.com",
+      "http": {
+        "final_url": "https://focus-on-free.com/",
+        "ok": true,
+        "server": "cloudflare",
+        "signals": [
+          "cloudflare",
+          "wordpress"
+        ],
+        "status": 200
+      },
+      "https": {
+        "final_url": "https://focus-on-free.com/",
+        "ok": true,
+        "server": "cloudflare",
+        "signals": [
+          "cloudflare",
+          "wordpress"
+        ],
+        "status": 200
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": "TBD",
+      "role": "canonical-or-related-site",
+      "target_hosting": "github-pages-or-redirect",
+      "www_a": [
+        "172.67.143.6",
+        "104.21.87.115"
+      ],
+      "www_cname": []
+    },
+    {
+      "a": [
+        "104.21.21.230",
+        "172.67.200.242"
+      ],
+      "aaaa": [
+        "2606:4700:3032::6815:15e6",
+        "2606:4700:3034::ac43:c8f2"
+      ],
+      "canonical_target": null,
+      "classification": "dns-present-http-issue",
+      "cname": [],
+      "domain": "focusonfree.org",
+      "http": {
+        "error": "HTTP Error 403: Forbidden",
+        "final_url": "http://focusonfree.org/",
+        "ok": false,
+        "signals": [],
+        "status": 403
+      },
+      "https": {
+        "error": "HTTP Error 403: Forbidden",
+        "final_url": "https://focusonfree.org/",
+        "ok": false,
+        "signals": [],
+        "status": 403
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": "TBD",
+      "role": "canonical-or-related-site",
+      "target_hosting": "github-pages-or-redirect",
+      "www_a": [
+        "104.21.21.230",
+        "172.67.200.242"
+      ],
+      "www_cname": []
+    },
+    {
+      "a": [
+        "172.67.176.160",
+        "104.21.80.88"
+      ],
+      "aaaa": [
+        "2606:4700:3033::ac43:b0a0",
+        "2606:4700:3033::6815:5058"
+      ],
+      "canonical_target": null,
+      "classification": "dns-present-http-issue",
+      "cname": [],
+      "domain": "focusonfree.us",
+      "http": {
+        "error": "HTTP Error 403: Forbidden",
+        "final_url": "http://focusonfree.us/",
+        "ok": false,
+        "signals": [],
+        "status": 403
+      },
+      "https": {
+        "error": "HTTP Error 403: Forbidden",
+        "final_url": "https://focusonfree.us/",
+        "ok": false,
+        "signals": [],
+        "status": 403
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": "TBD",
+      "role": "canonical-or-related-site",
+      "target_hosting": "github-pages-or-redirect",
+      "www_a": [
+        "172.67.176.160",
+        "104.21.80.88"
+      ],
+      "www_cname": []
+    },
+    {
+      "a": [
+        "172.67.135.216",
+        "104.21.26.99"
+      ],
+      "aaaa": [
+        "2606:4700:3037::ac43:87d8",
+        "2606:4700:3033::6815:1a63"
+      ],
+      "canonical_target": null,
+      "classification": "wordpress-detected",
+      "cname": [],
+      "domain": "moyermanagement.com",
+      "http": {
+        "final_url": "https://moyermanagement.com/",
+        "ok": true,
+        "server": "cloudflare",
+        "signals": [
+          "cloudflare",
+          "wordpress"
+        ],
+        "status": 200
+      },
+      "https": {
+        "final_url": "https://moyermanagement.com/",
+        "ok": true,
+        "server": "cloudflare",
+        "signals": [
+          "cloudflare",
+          "wordpress"
+        ],
+        "status": 200
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": "TBD",
+      "role": "canonical-site",
+      "target_hosting": "github-pages",
+      "www_a": [
+        "104.21.26.99",
+        "172.67.135.216"
+      ],
+      "www_cname": []
+    },
+    {
+      "a": [
+        "172.67.145.29",
+        "104.21.63.94"
+      ],
+      "aaaa": [
+        "2606:4700:3030::6815:3f5e",
+        "2606:4700:3034::ac43:911d"
+      ],
+      "canonical_target": "moyermanagement.com",
+      "classification": "redirect-only-candidate",
+      "cname": [],
+      "domain": "moyermanagement.org",
+      "http": {
+        "error": "TimeoutError: The read operation timed out",
+        "final_url": "http://moyermanagement.org/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "https": {
+        "error": "TimeoutError: The read operation timed out",
+        "final_url": "https://moyermanagement.org/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": null,
+      "role": "redirect-only",
+      "target_hosting": "cloudflare-redirect",
+      "www_a": [],
+      "www_cname": []
+    },
+    {
+      "a": [],
+      "aaaa": [],
+      "canonical_target": null,
+      "classification": "no-apex-records-detected",
+      "cname": [],
+      "domain": "moyermanagementsystems.com",
+      "http": {
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "final_url": "http://moyermanagementsystems.com/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "https": {
+        "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+        "final_url": "https://moyermanagementsystems.com/",
+        "ok": false,
+        "signals": [],
+        "status": null
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": "TBD",
+      "role": "canonical-or-related-site",
+      "target_hosting": "github-pages",
+      "www_a": [],
+      "www_cname": []
+    },
+    {
+      "a": [
+        "172.67.172.185",
+        "104.21.30.98"
+      ],
+      "aaaa": [
+        "2606:4700:3033::ac43:acb9",
+        "2606:4700:3032::6815:1e62"
+      ],
+      "canonical_target": null,
+      "classification": "dns-present-http-issue",
+      "cname": [],
+      "domain": "physicalinvestor.com",
+      "http": {
+        "error": "HTTP Error 403: Forbidden",
+        "final_url": "http://physicalinvestor.com/",
+        "ok": false,
+        "signals": [],
+        "status": 403
+      },
+      "https": {
+        "error": "HTTP Error 403: Forbidden",
+        "final_url": "https://physicalinvestor.com/",
+        "ok": false,
+        "signals": [],
+        "status": 403
+      },
+      "ns": [
+        "cody.ns.cloudflare.com",
+        "lisa.ns.cloudflare.com"
+      ],
+      "repo": "TBD",
+      "role": "canonical-site",
+      "target_hosting": "github-pages",
+      "www_a": [
+        "172.67.172.185",
+        "104.21.30.98"
+      ],
+      "www_cname": []
+    },
+    {
+      "a": [
+        "185.199.110.153",
+        "185.199.111.153",
+        "185.199.108.153",
+        "185.199.109.153"
+      ],
+      "aaaa": [
+        "2606:50c0:8001::153",
+        "2606:50c0:8000::153",
+        "2606:50c0:8002::153",
+        "2606:50c0:8003::153"
+      ],
+      "canonical_target": null,
+      "classification": "github-pages-detected",
+      "cname": [],
+      "domain": "technologyadoptionbarriers.org",
+      "http": {
+        "final_url": "https://technologyadoptionbarriers.org/",
+        "ok": true,
+        "server": "GitHub.com",
+        "signals": [],
+        "status": 200
+      },
+      "https": {
+        "final_url": "https://technologyadoptionbarriers.org/",
+        "ok": true,
+        "server": "GitHub.com",
+        "signals": [],
+        "status": 200
+      },
+      "ns": [
+        "ns1.freeforcharity.org",
+        "ns2.freeforcharity.org"
+      ],
+      "repo": "clarkemoyer/technologyadoptionbarriers.org",
+      "role": "canonical-site",
+      "target_hosting": "github-pages",
+      "www_a": [
+        "clarkemoyer.github.io",
+        "185.199.108.153",
+        "185.199.109.153",
+        "185.199.110.153",
+        "185.199.111.153"
+      ],
+      "www_cname": [
+        "clarkemoyer.github.io"
+      ]
+    }
+  ],
+  "generated_at_utc": "2026-05-03T21-34-18Z",
+  "read_only": true
+}
