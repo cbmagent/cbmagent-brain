@@ -1,0 +1,69 @@
+version: 1
+updated: 2026-05-03
+repo: cbmagent/cbmagent-brain
+operating_model: issue_branch_pr_review_merge
+selection_rules:
+  - prefer priority:critical issues that are not human-needed and not blocked
+  - prefer read-only automation before write-gated automation
+  - create/update repo artifacts through PRs
+  - create human-needed issues instead of blocking silently
+  - never print or commit credentials
+  - keep per-site work in each site repo once it exists
+workstreams:
+  autonomous_operations:
+    epic_issue: 13
+    objective: Turn the brain repo into an active autonomous operations loop.
+    first_tasks: [45, 28, 41]
+  domain_inventory:
+    epic_issue: 14
+    objective: Continuously audit portfolio domains and migration readiness.
+    first_tasks: [25, 36, 37, 39]
+  repo_discovery:
+    epic_issue: 15
+    objective: Map domains to existing or needed GitHub repositories.
+    first_tasks: [26, 42, 43, 44]
+  site_factory:
+    epic_issue: 16
+    objective: Create net-new GitHub Pages sites from Free For Charity templates.
+    first_tasks: [34, 38]
+  wordpress_migration:
+    epic_issue: 17
+    objective: Build reusable WordPress-to-static migration workflow.
+    first_tasks: [39]
+  cloudflare_automation:
+    epic_issue: 18
+    objective: Split read-only Cloudflare inspection from gated production writes.
+    first_tasks: [29, 30, 33]
+  microsoft_google_automation:
+    epic_issue: 19
+    objective: Add safe Microsoft and Google read-only/status automation.
+    first_tasks: [31, 32]
+  provider_health:
+    epic_issue: 20
+    objective: Track provider usage, quota signals, health, and routing.
+    first_tasks: [40, 41]
+  vscode_console:
+    epic_issue: 21
+    objective: Make VS Code a practical local operator console.
+    first_tasks: [44]
+  nonprofit_giveback:
+    epic_issue: 22
+    objective: Ensure downstream work credits and improves Free For Charity repos.
+    first_tasks: [33, 34, 35]
+  tabs_extraction:
+    epic_issue: 23
+    objective: Extract reusable TABS automation patterns.
+    first_tasks: [23]
+  per_site_program:
+    epic_issue: 24
+    objective: Run domain-by-domain migrations using repo-native GitHub workflows.
+    first_tasks: [36, 37]
+human_needed_queue:
+  - issue: 29
+    task: Create Cloudflare read-only token/environment.
+  - issue: 30
+    task: Create protected Cloudflare production write token/environment.
+  - issue: 31
+    task: Create Microsoft read-only domain app/environment.
+  - issue: 32
+    task: Create Google read-only credential/environment.
