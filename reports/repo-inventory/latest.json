@@ -1,0 +1,205 @@
+{
+  "domain_count": 15,
+  "generated_at": "2026-05-03T21-57-12Z",
+  "mappings": [
+    {
+      "declared_repo": "cbmagent/clarkemoyer.com",
+      "domain": "clarkemoyer.com",
+      "priority": "p0",
+      "role": "canonical-site",
+      "status": "declared-repo-not-accessible-or-not-found",
+      "top_matches": [
+        {
+          "description": "Repository for the refactoring of the Clarke Moyer Personal Pages",
+          "homepageUrl": "https://staging.clarkemoyer.com",
+          "reasons": [
+            "description contains domain",
+            "homepage contains domain",
+            "repo name contains domain stem",
+            "repo name matches domain"
+          ],
+          "repo": "clarkemoyer/clarkemoyer.com",
+          "score": 275,
+          "url": "https://github.com/clarkemoyer/clarkemoyer.com",
+          "visibility": "PUBLIC"
+        },
+        {
+          "description": "My GitHub Profile Markdown Repo",
+          "homepageUrl": "",
+          "reasons": [
+            "repo name matches domain"
+          ],
+          "repo": "clarkemoyer/clarkemoyer",
+          "score": 80,
+          "url": "https://github.com/clarkemoyer/clarkemoyer",
+          "visibility": "PUBLIC"
+        },
+        {
+          "description": "HTML personal page of Clarke Moyer",
+          "homepageUrl": "",
+          "reasons": [
+            "description contains domain",
+            "repo name contains domain stem"
+          ],
+          "repo": "clarkemoyer/clarkemoyer-html",
+          "score": 75,
+          "url": "https://github.com/clarkemoyer/clarkemoyer-html",
+          "visibility": "PUBLIC"
+        }
+      ]
+    },
+    {
+      "declared_repo": null,
+      "domain": "clarkmoyer.com",
+      "priority": "p2",
+      "role": "redirect-only",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": "TBD",
+      "domain": "completequarters.com",
+      "priority": "p2",
+      "role": "canonical-site",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": null,
+      "domain": "completequarters.org",
+      "priority": "p3",
+      "role": "redirect-only",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": "TBD",
+      "domain": "moyermanagement.com",
+      "priority": "p1",
+      "role": "canonical-site",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": null,
+      "domain": "moyermanagement.org",
+      "priority": "p3",
+      "role": "redirect-only",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": "TBD",
+      "domain": "moyermanagementsystems.com",
+      "priority": "p2",
+      "role": "canonical-or-related-site",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": "TBD",
+      "domain": "physicalinvestor.com",
+      "priority": "p1",
+      "role": "canonical-site",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": "clarkemoyer/technologyadoptionbarriers.org",
+      "domain": "technologyadoptionbarriers.org",
+      "priority": "p0",
+      "role": "canonical-site",
+      "status": "mapped",
+      "top_matches": [
+        {
+          "description": "Website for the support of the TABS survey ",
+          "homepageUrl": "",
+          "reasons": [
+            "declared repo exact match",
+            "repo name contains domain stem",
+            "repo name matches domain"
+          ],
+          "repo": "clarkemoyer/technologyadoptionbarriers.org",
+          "score": 230,
+          "url": "https://github.com/clarkemoyer/technologyadoptionbarriers.org",
+          "visibility": "PUBLIC"
+        }
+      ]
+    },
+    {
+      "declared_repo": "TBD",
+      "domain": "aprilmoyer.com",
+      "priority": "p2",
+      "role": "canonical-site",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": "TBD",
+      "domain": "aprilunlimited.com",
+      "priority": "p2",
+      "role": "canonical-site",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": "TBD",
+      "domain": "darkclouds.us",
+      "priority": "p3",
+      "role": "canonical-site",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": "TBD",
+      "domain": "focus-on-free.com",
+      "priority": "p2",
+      "role": "canonical-or-related-site",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": "TBD",
+      "domain": "focusonfree.org",
+      "priority": "p2",
+      "role": "canonical-or-related-site",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    },
+    {
+      "declared_repo": "TBD",
+      "domain": "focusonfree.us",
+      "priority": "p3",
+      "role": "canonical-or-related-site",
+      "status": "missing-or-unknown",
+      "top_matches": []
+    }
+  ],
+  "missing_canonical_domains": [
+    "completequarters.com",
+    "moyermanagement.com",
+    "moyermanagementsystems.com",
+    "physicalinvestor.com",
+    "aprilmoyer.com",
+    "aprilunlimited.com",
+    "darkclouds.us",
+    "focus-on-free.com",
+    "focusonfree.org",
+    "focusonfree.us"
+  ],
+  "owners": {
+    "FreeForCharity": {
+      "count": 35,
+      "error": null
+    },
+    "cbmagent": {
+      "count": 2,
+      "error": null
+    },
+    "clarkemoyer": {
+      "count": 8,
+      "error": null
+    }
+  },
+  "repo_count": 45
+}
