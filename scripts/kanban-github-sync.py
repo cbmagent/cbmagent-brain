@@ -23,6 +23,9 @@ Status mapping:
 
 Usage:
     python3 scripts/kanban-github-sync.py [--dry-run] [--repo OWNER/REPO] [--open-scope agent-ready|all]
+                                                                        [--auto-assign-profile PROFILE]
+                                                                        [--auto-assign-limit N]
+                                                                        [--auto-dispatch-max N]
 """
 
 import argparse
@@ -273,6 +276,61 @@ def create_review_handoff_task(repo: str, issue: dict, dry_run: bool):
     if result.returncode != 0:
         print(f"  [warn] unable to create review handoff task for #{issue_num}: {result.stderr.strip()}", file=sys.stderr)
 
+
+def is_human_needed_task(task: dict) -> bool:
+    """Heuristic: skip auto-assignment for human-needed tasks."""
+    text = f"{task.get('title', '')}\n{task.get('body', '')}".lower()
+    return (
+        "human-needed" in text
+        or "status:blocked-human" in text
+        or "blocked-human" in text
+    )
+
+
+def bounded_auto_assign_and_dispatch(
+    repo: str,
+    tasks: list[dict],
+    dry_run: bool,
+    auto_assign_profile: str,
+    auto_assign_limit: int,
+    auto_dispatch_max: int,
+):
+    print("\n[Bounded auto-assign/dispatch]")
+
+    if auto_assign_limit <= 0 and auto_dispatch_max <= 0:
+        print("  (disabled)")
+        return
+
+    eligible = []
+    for task in tasks:
+        if task.get("status") != "ready":
+            continue
+        if task.get("assignee"):
+            continue
+        task_repo = extract_repo_from_task(task)
+        if task_repo and task_repo.lower() != repo.lower():
+            continue
+        if is_human_needed_task(task):
+            continue
+        eligible.append(task)
+
+    # oldest-first so queue drains fairly
+    eligible.sort(key=lambda t: t.get("created_at") or 0)
+
+    assigned = 0
+    for task in eligible[: max(0, auto_assign_limit)]:
+        assign_kanban_task(task["id"], auto_assign_profile, dry_run)
+        assigned += 1
+
+    if auto_dispatch_max > 0:
+        print(f"  ~ dispatch max={auto_dispatch_max}")
+        if not dry_run:
+            hermes("kanban", "dispatch", "--max", str(auto_dispatch_max), check=False)
+    else:
+        print("  ~ dispatch skipped (--auto-dispatch-max=0)")
+
+    print(f"  assigned={assigned}, eligible={len(eligible)}")
+
 def add_sentinel_to_issue(repo: str, issue_number: int, task_id: str, dry_run: bool):
     """Append kanban sentinel to issue body."""
     raw = gh("issue", "view", str(issue_number), "--repo", repo, "--json", "body")
@@ -287,7 +345,14 @@ def add_sentinel_to_issue(repo: str, issue_number: int, task_id: str, dry_run: b
         gh("issue", "edit", str(issue_number), "--repo", repo, "--body", new_body)
 
 
-def sync(repo: str, dry_run: bool, open_scope: str):
+def sync(
+    repo: str,
+    dry_run: bool,
+    open_scope: str,
+    auto_assign_profile: str,
+    auto_assign_limit: int,
+    auto_dispatch_max: int,
+):
     conn = kanban_db()
     tasks = get_kanban_tasks(conn)
     conn.close()
@@ -448,6 +513,16 @@ def sync(repo: str, dry_run: bool, open_scope: str):
         if has_review_requested_label(issue):
             create_review_handoff_task(repo, issue, dry_run)
 
+    # Controlled autonomous drain to avoid token/API spikes.
+    bounded_auto_assign_and_dispatch(
+        repo=repo,
+        tasks=tasks,
+        dry_run=dry_run,
+        auto_assign_profile=auto_assign_profile,
+        auto_assign_limit=auto_assign_limit,
+        auto_dispatch_max=auto_dispatch_max,
+    )
+
     print("\n[Done]")
 
 
@@ -461,12 +536,36 @@ def main():
         default="agent-ready",
         help="Which open issues to mirror into Kanban (default: agent-ready)",
     )
+    parser.add_argument(
+        "--auto-assign-profile",
+        default="default",
+        help="Profile to auto-assign eligible ready tasks to (default: default)",
+    )
+    parser.add_argument(
+        "--auto-assign-limit",
+        type=int,
+        default=0,
+        help="Max eligible ready tasks to auto-assign each run (default: 0)",
+    )
+    parser.add_argument(
+        "--auto-dispatch-max",
+        type=int,
+        default=0,
+        help="If >0, run one dispatch pass with this spawn cap (default: 0)",
+    )
     args = parser.parse_args()
 
     if args.dry_run:
         print("[DRY RUN — no changes will be made]\n")
 
-    sync(args.repo, args.dry_run, args.open_scope)
+    sync(
+        args.repo,
+        args.dry_run,
+        args.open_scope,
+        args.auto_assign_profile,
+        args.auto_assign_limit,
+        args.auto_dispatch_max,
+    )
 
 
 if __name__ == "__main__":
