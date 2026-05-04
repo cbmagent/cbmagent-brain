@@ -1,0 +1,53 @@
+name: Hermes provider verification
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_smoke:
+        description: Run tiny live Hermes provider smoke checks
+        required: false
+        default: 'false'
+        type: choice
+        options: ['false', 'true']
+      include_fallbacks:
+        description: Include fallback providers when live smoke checks are enabled
+        required: false
+        default: 'false'
+        type: choice
+        options: ['false', 'true']
+  schedule:
+    - cron: '17 10 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Inventory Hermes provider routing
+        run: |
+          args=()
+          if [ "${{ github.event.inputs.run_smoke || 'false' }}" = "true" ]; then
+            args+=(--smoke)
+          fi
+          if [ "${{ github.event.inputs.include_fallbacks || 'false' }}" = "true" ]; then
+            args+=(--include-fallbacks)
+          fi
+          python scripts/hermes-verification.py "${args[@]}"
+
+      - name: Upload redacted verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hermes-verification-report
+          path: reports/hermes-verification/
+          if-no-files-found: warn
