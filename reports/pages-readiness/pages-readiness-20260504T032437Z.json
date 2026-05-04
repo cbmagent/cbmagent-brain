@@ -1,0 +1,599 @@
+{
+  "run_date": "2026-05-04",
+  "domains": [
+    {
+      "domain": "clarkemoyer.com",
+      "role": "canonical-site",
+      "repo": "cbmagent/clarkemoyer.com",
+      "priority": "p0",
+      "current_state": "wordpress-migrating-to-nextjs",
+      "checked_at": "2026-05-04T03:24:31.454986+00:00",
+      "dns": {
+        "a": [
+          "185.199.111.153",
+          "185.199.108.153",
+          "185.199.109.153",
+          "185.199.110.153"
+        ],
+        "aaaa": [
+          "2606:50c0:8003::153",
+          "2606:50c0:8000::153",
+          "2606:50c0:8002::153",
+          "2606:50c0:8001::153"
+        ],
+        "cname_chain": [],
+        "www_a": [
+          "clarkemoyer.github.io",
+          "185.199.108.153",
+          "185.199.109.153",
+          "185.199.110.153",
+          "185.199.111.153"
+        ],
+        "www_cname": [
+          "clarkemoyer.github.io"
+        ]
+      },
+      "http_probe": {
+        "https": {
+          "ok": true,
+          "status": 200,
+          "final_url": "https://clarkemoyer.com/",
+          "server": "GitHub.com",
+          "signals": []
+        },
+        "http": {
+          "ok": true,
+          "status": 200,
+          "final_url": "https://clarkemoyer.com/",
+          "server": "GitHub.com",
+          "signals": []
+        }
+      },
+      "github": {
+        "repo_exists": false,
+        "pages_enabled": null,
+        "pages_url": null
+      },
+      "classification": "READY",
+      "summary": "DNS \u2192 GitHub Pages, HTTPS 200."
+    },
+    {
+      "domain": "technologyadoptionbarriers.org",
+      "role": "canonical-site",
+      "repo": "clarkemoyer/technologyadoptionbarriers.org",
+      "priority": "p0",
+      "current_state": "live-production-reference",
+      "checked_at": "2026-05-04T03:24:31.457150+00:00",
+      "dns": {
+        "a": [
+          "185.199.111.153",
+          "185.199.110.153",
+          "185.199.109.153",
+          "185.199.108.153"
+        ],
+        "aaaa": [
+          "2606:50c0:8003::153",
+          "2606:50c0:8001::153",
+          "2606:50c0:8002::153",
+          "2606:50c0:8000::153"
+        ],
+        "cname_chain": [],
+        "www_a": [
+          "clarkemoyer.github.io",
+          "185.199.108.153",
+          "185.199.111.153",
+          "185.199.109.153",
+          "185.199.110.153"
+        ],
+        "www_cname": [
+          "clarkemoyer.github.io"
+        ]
+      },
+      "http_probe": {
+        "https": {
+          "ok": true,
+          "status": 200,
+          "final_url": "https://technologyadoptionbarriers.org/",
+          "server": "GitHub.com",
+          "signals": []
+        },
+        "http": {
+          "ok": true,
+          "status": 200,
+          "final_url": "https://technologyadoptionbarriers.org/",
+          "server": "GitHub.com",
+          "signals": []
+        }
+      },
+      "github": {
+        "repo_exists": true,
+        "pages_enabled": false,
+        "pages_url": null
+      },
+      "classification": "READY",
+      "summary": "DNS \u2192 GitHub Pages, HTTPS 200."
+    },
+    {
+      "domain": "moyermanagement.com",
+      "role": "canonical-site",
+      "repo": "TBD",
+      "priority": "p1",
+      "current_state": "audit-needed",
+      "checked_at": "2026-05-04T03:24:31.456442+00:00",
+      "dns": {
+        "a": [
+          "172.67.135.216",
+          "104.21.26.99"
+        ],
+        "aaaa": [
+          "2606:4700:3037::ac43:87d8",
+          "2606:4700:3033::6815:1a63"
+        ],
+        "cname_chain": [],
+        "www_a": [
+          "104.21.26.99",
+          "172.67.135.216"
+        ],
+        "www_cname": []
+      },
+      "http_probe": {
+        "https": {
+          "ok": true,
+          "status": 200,
+          "final_url": "https://moyermanagement.com/",
+          "server": "cloudflare",
+          "signals": [
+            "cloudflare",
+            "wordpress"
+          ]
+        },
+        "http": {
+          "ok": true,
+          "status": 200,
+          "final_url": "https://moyermanagement.com/",
+          "server": "cloudflare",
+          "signals": [
+            "cloudflare",
+            "wordpress"
+          ]
+        }
+      },
+      "github": {
+        "repo_exists": null,
+        "pages_enabled": null,
+        "pages_url": null
+      },
+      "classification": "WORDPRESS",
+      "summary": "Live WordPress site \u2014 migration needed before Pages cutover."
+    },
+    {
+      "domain": "aprilunlimited.com",
+      "role": "canonical-site",
+      "repo": "TBD",
+      "priority": "p2",
+      "current_state": "audit-needed",
+      "checked_at": "2026-05-04T03:24:32.239316+00:00",
+      "dns": {
+        "a": [
+          "104.21.30.239",
+          "172.67.174.48"
+        ],
+        "aaaa": [
+          "2606:4700:3036::6815:1eef",
+          "2606:4700:3036::ac43:ae30"
+        ],
+        "cname_chain": [],
+        "www_a": [
+          "104.21.30.239",
+          "172.67.174.48"
+        ],
+        "www_cname": []
+      },
+      "http_probe": {
+        "https": {
+          "ok": true,
+          "status": 200,
+          "final_url": "https://aprilunlimited.com/",
+          "server": "cloudflare",
+          "signals": [
+            "cloudflare",
+            "wordpress"
+          ]
+        },
+        "http": {
+          "ok": true,
+          "status": 200,
+          "final_url": "https://aprilunlimited.com/",
+          "server": "cloudflare",
+          "signals": [
+            "cloudflare",
+            "wordpress"
+          ]
+        }
+      },
+      "github": {
+        "repo_exists": null,
+        "pages_enabled": null,
+        "pages_url": null
+      },
+      "classification": "WORDPRESS",
+      "summary": "Live WordPress site \u2014 migration needed before Pages cutover."
+    },
+    {
+      "domain": "focus-on-free.com",
+      "role": "canonical-or-related-site",
+      "repo": "TBD",
+      "priority": "p2",
+      "current_state": "audit-needed",
+      "checked_at": "2026-05-04T03:24:33.368413+00:00",
+      "dns": {
+        "a": [
+          "172.67.143.6",
+          "104.21.87.115"
+        ],
+        "aaaa": [
+          "2606:4700:3030::6815:5773",
+          "2606:4700:3032::ac43:8f06"
+        ],
+        "cname_chain": [],
+        "www_a": [
+          "172.67.143.6",
+          "104.21.87.115"
+        ],
+        "www_cname": []
+      },
+      "http_probe": {
+        "https": {
+          "ok": true,
+          "status": 200,
+          "final_url": "https://focus-on-free.com/",
+          "server": "cloudflare",
+          "signals": [
+            "cloudflare",
+            "wordpress"
+          ]
+        },
+        "http": {
+          "ok": true,
+          "status": 200,
+          "final_url": "https://focus-on-free.com/",
+          "server": "cloudflare",
+          "signals": [
+            "cloudflare",
+            "wordpress"
+          ]
+        }
+      },
+      "github": {
+        "repo_exists": null,
+        "pages_enabled": null,
+        "pages_url": null
+      },
+      "classification": "WORDPRESS",
+      "summary": "Live WordPress site \u2014 migration needed before Pages cutover."
+    },
+    {
+      "domain": "aprilmoyer.com",
+      "role": "canonical-site",
+      "repo": "TBD",
+      "priority": "p2",
+      "current_state": "audit-needed",
+      "checked_at": "2026-05-04T03:24:32.238531+00:00",
+      "dns": {
+        "a": [],
+        "aaaa": [],
+        "cname_chain": [],
+        "www_a": [],
+        "www_cname": []
+      },
+      "http_probe": {
+        "https": {
+          "ok": false,
+          "status": null,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+          "final_url": "https://aprilmoyer.com/",
+          "signals": []
+        },
+        "http": {
+          "ok": false,
+          "status": null,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+          "final_url": "http://aprilmoyer.com/",
+          "signals": []
+        }
+      },
+      "github": {
+        "repo_exists": null,
+        "pages_enabled": null,
+        "pages_url": null
+      },
+      "classification": "UNREACHABLE",
+      "summary": "No DNS records found."
+    },
+    {
+      "domain": "completequarters.com",
+      "role": "canonical-site",
+      "repo": "TBD",
+      "priority": "p2",
+      "current_state": "audit-needed",
+      "checked_at": "2026-05-04T03:24:31.455835+00:00",
+      "dns": {
+        "a": [],
+        "aaaa": [],
+        "cname_chain": [],
+        "www_a": [],
+        "www_cname": []
+      },
+      "http_probe": {
+        "https": {
+          "ok": false,
+          "status": null,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+          "final_url": "https://completequarters.com/",
+          "signals": []
+        },
+        "http": {
+          "ok": false,
+          "status": null,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+          "final_url": "http://completequarters.com/",
+          "signals": []
+        }
+      },
+      "github": {
+        "repo_exists": null,
+        "pages_enabled": null,
+        "pages_url": null
+      },
+      "classification": "UNREACHABLE",
+      "summary": "No DNS records found."
+    },
+    {
+      "domain": "moyermanagementsystems.com",
+      "role": "canonical-or-related-site",
+      "repo": "TBD",
+      "priority": "p2",
+      "current_state": "audit-needed",
+      "checked_at": "2026-05-04T03:24:31.456875+00:00",
+      "dns": {
+        "a": [],
+        "aaaa": [],
+        "cname_chain": [],
+        "www_a": [],
+        "www_cname": []
+      },
+      "http_probe": {
+        "https": {
+          "ok": false,
+          "status": null,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+          "final_url": "https://moyermanagementsystems.com/",
+          "signals": []
+        },
+        "http": {
+          "ok": false,
+          "status": null,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+          "final_url": "http://moyermanagementsystems.com/",
+          "signals": []
+        }
+      },
+      "github": {
+        "repo_exists": null,
+        "pages_enabled": null,
+        "pages_url": null
+      },
+      "classification": "UNREACHABLE",
+      "summary": "No DNS records found."
+    },
+    {
+      "domain": "darkclouds.us",
+      "role": "canonical-site",
+      "repo": "TBD",
+      "priority": "p3",
+      "current_state": "audit-needed",
+      "checked_at": "2026-05-04T03:24:32.956246+00:00",
+      "dns": {
+        "a": [],
+        "aaaa": [],
+        "cname_chain": [],
+        "www_a": [],
+        "www_cname": []
+      },
+      "http_probe": {
+        "https": {
+          "ok": false,
+          "status": null,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+          "final_url": "https://darkclouds.us/",
+          "signals": []
+        },
+        "http": {
+          "ok": false,
+          "status": null,
+          "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+          "final_url": "http://darkclouds.us/",
+          "signals": []
+        }
+      },
+      "github": {
+        "repo_exists": null,
+        "pages_enabled": null,
+        "pages_url": null
+      },
+      "classification": "UNREACHABLE",
+      "summary": "No DNS records found."
+    },
+    {
+      "domain": "physicalinvestor.com",
+      "role": "canonical-site",
+      "repo": "TBD",
+      "priority": "p1",
+      "current_state": "audit-needed",
+      "checked_at": "2026-05-04T03:24:31.457064+00:00",
+      "dns": {
+        "a": [
+          "104.21.30.98",
+          "172.67.172.185"
+        ],
+        "aaaa": [
+          "2606:4700:3032::6815:1e62",
+          "2606:4700:3033::ac43:acb9"
+        ],
+        "cname_chain": [],
+        "www_a": [
+          "172.67.172.185",
+          "104.21.30.98"
+        ],
+        "www_cname": []
+      },
+      "http_probe": {
+        "https": {
+          "ok": false,
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden",
+          "final_url": "https://physicalinvestor.com/",
+          "signals": []
+        },
+        "http": {
+          "ok": false,
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden",
+          "final_url": "http://physicalinvestor.com/",
+          "signals": []
+        }
+      },
+      "github": {
+        "repo_exists": null,
+        "pages_enabled": null,
+        "pages_url": null
+      },
+      "classification": "NEEDS_AUDIT",
+      "summary": "Repo TBD or audit-needed; classify after domain audit."
+    },
+    {
+      "domain": "focusonfree.org",
+      "role": "canonical-or-related-site",
+      "repo": "TBD",
+      "priority": "p2",
+      "current_state": "audit-needed",
+      "checked_at": "2026-05-04T03:24:33.467125+00:00",
+      "dns": {
+        "a": [
+          "172.67.200.242",
+          "104.21.21.230"
+        ],
+        "aaaa": [
+          "2606:4700:3034::ac43:c8f2",
+          "2606:4700:3032::6815:15e6"
+        ],
+        "cname_chain": [],
+        "www_a": [
+          "104.21.21.230",
+          "172.67.200.242"
+        ],
+        "www_cname": []
+      },
+      "http_probe": {
+        "https": {
+          "ok": false,
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden",
+          "final_url": "https://focusonfree.org/",
+          "signals": []
+        },
+        "http": {
+          "ok": false,
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden",
+          "final_url": "http://focusonfree.org/",
+          "signals": []
+        }
+      },
+      "github": {
+        "repo_exists": null,
+        "pages_enabled": null,
+        "pages_url": null
+      },
+      "classification": "NEEDS_AUDIT",
+      "summary": "Repo TBD or audit-needed; classify after domain audit."
+    },
+    {
+      "domain": "focusonfree.us",
+      "role": "canonical-or-related-site",
+      "repo": "TBD",
+      "priority": "p3",
+      "current_state": "audit-needed",
+      "checked_at": "2026-05-04T03:24:33.468699+00:00",
+      "dns": {
+        "a": [
+          "104.21.80.88",
+          "172.67.176.160"
+        ],
+        "aaaa": [
+          "2606:4700:3033::ac43:b0a0",
+          "2606:4700:3033::6815:5058"
+        ],
+        "cname_chain": [],
+        "www_a": [
+          "104.21.80.88",
+          "172.67.176.160"
+        ],
+        "www_cname": []
+      },
+      "http_probe": {
+        "https": {
+          "ok": false,
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden",
+          "final_url": "https://focusonfree.us/",
+          "signals": []
+        },
+        "http": {
+          "ok": false,
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden",
+          "final_url": "http://focusonfree.us/",
+          "signals": []
+        }
+      },
+      "github": {
+        "repo_exists": null,
+        "pages_enabled": null,
+        "pages_url": null
+      },
+      "classification": "NEEDS_AUDIT",
+      "summary": "Repo TBD or audit-needed; classify after domain audit."
+    },
+    {
+      "domain": "clarkmoyer.com",
+      "role": "redirect-only",
+      "repo": "TBD",
+      "priority": "p2",
+      "current_state": "",
+      "checked_at": "2026-05-04T03:24:31.455640+00:00",
+      "classification": "REDIRECTOR",
+      "summary": "Redirect-only domain; no Pages required."
+    },
+    {
+      "domain": "completequarters.org",
+      "role": "redirect-only",
+      "repo": "TBD",
+      "priority": "p3",
+      "current_state": "",
+      "checked_at": "2026-05-04T03:24:31.455953+00:00",
+      "classification": "REDIRECTOR",
+      "summary": "Redirect-only domain; no Pages required."
+    },
+    {
+      "domain": "moyermanagement.org",
+      "role": "redirect-only",
+      "repo": "TBD",
+      "priority": "p3",
+      "current_state": "",
+      "checked_at": "2026-05-04T03:24:31.456493+00:00",
+      "classification": "REDIRECTOR",
+      "summary": "Redirect-only domain; no Pages required."
+    }
+  ]
+}
