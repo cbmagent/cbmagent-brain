@@ -22,7 +22,7 @@ Status mapping:
   Kanban done        →  GitHub Issue closed with summary comment
 
 Usage:
-  python3 scripts/kanban-github-sync.py [--dry-run] [--repo OWNER/REPO]
+    python3 scripts/kanban-github-sync.py [--dry-run] [--repo OWNER/REPO] [--open-scope agent-ready|all]
 """
 
 import argparse
@@ -82,15 +82,17 @@ def get_kanban_tasks(conn):
     return [dict(r) for r in rows]
 
 
-def get_github_issues(repo: str):
-    raw = gh(
+def get_open_github_issues(repo: str, open_scope: str):
+    args = [
         "issue", "list",
         "--repo", repo,
         "--state", "open",
-        "--label", AGENT_READY_LABEL,
-        "--limit", "100",
-        "--json", "number,title,body,url,labels",
-    )
+        "--limit", "200",
+        "--json", "number,title,body,url,labels,assignees",
+    ]
+    if open_scope == "agent-ready":
+        args += ["--label", AGENT_READY_LABEL]
+    raw = gh(*args)
     if not raw:
         return []
     return json.loads(raw)
@@ -142,6 +144,10 @@ def extract_repo_from_task(task: dict) -> str | None:
     m = TASK_REPO_RE.search(body)
     if m:
         return m.group(1).strip()
+    # Fallback for older tasks that stored literal "\\n" escapes in body text.
+    m = re.search(r"repo:\s*([^\s\\]+)", body, re.IGNORECASE)
+    if m:
+        return m.group(1).strip()
     m = TASK_URL_RE.search(body)
     if m:
         return m.group(1).strip()
@@ -184,12 +190,23 @@ def create_github_issue(repo: str, title: str, body: str, labels: list[str], dry
     return int(m.group(1)) if m else None
 
 
-def create_kanban_task(title: str, body: str, dry_run: bool) -> str | None:
+def create_kanban_task(
+    title: str,
+    body: str,
+    dry_run: bool,
+    idempotency_key: str | None = None,
+    assignee: str | None = None,
+) -> str | None:
     print(f"  + Kanban task: {title!r}")
     if dry_run:
         return None
+    cmd = ["hermes", "kanban", "create", title, "--body", body]
+    if idempotency_key:
+        cmd += ["--idempotency-key", idempotency_key]
+    if assignee:
+        cmd += ["--assignee", assignee]
     result = subprocess.run(
-        ["hermes", "kanban", "create", title, "--body", body],
+        cmd,
         capture_output=True, text=True
     )
     if result.returncode != 0:
@@ -270,7 +287,7 @@ def add_sentinel_to_issue(repo: str, issue_number: int, task_id: str, dry_run: b
         gh("issue", "edit", str(issue_number), "--repo", repo, "--body", new_body)
 
 
-def sync(repo: str, dry_run: bool):
+def sync(repo: str, dry_run: bool, open_scope: str):
     conn = kanban_db()
     tasks = get_kanban_tasks(conn)
     conn.close()
@@ -306,11 +323,11 @@ def sync(repo: str, dry_run: bool):
                 )
 
     # ── Direction 1: GitHub → Kanban ──────────────────────────────────────────
-    # Issues labelled agent-ready with no kanban task → create task
+    # Open issues with no kanban task → create task (scope controlled by --open-scope)
     print("\n[GitHub → Kanban]")
-    agent_ready_issues = get_github_issues(repo)
+    open_issues = get_open_github_issues(repo, open_scope)
     existing_task_ids_in_issues = set()
-    for issue in agent_ready_issues:
+    for issue in open_issues:
         tid = extract_kanban_id_from_issue(issue)
         if tid and tid in task_by_id:
             existing_task_ids_in_issues.add(tid)
@@ -320,10 +337,29 @@ def sync(repo: str, dry_run: bool):
             continue
         # No kanban task yet — create one
         body = (issue.get("body") or "").strip()
-        task_body = f"{body}\n\ngithub-issue: #{issue['number']}\ngithub-url: {issue['url']}"
-        task_id = create_kanban_task(issue["title"], task_body, dry_run)
+        labels = ",".join(l["name"] for l in issue.get("labels", [])) or "(none)"
+        assignees = ",".join(a.get("login", "") for a in issue.get("assignees", [])) or "(none)"
+        task_body = (
+            f"repo: {repo}\n"
+            f"github-issue: #{issue['number']}\n"
+            f"github-url: {issue['url']}\n"
+            f"github-labels: {labels}\n"
+            f"github-assignees: {assignees}\n\n"
+            f"{body}"
+        )
+        idempotency_key = f"gh:{repo}#{issue['number']}"
+        assignee = COPILOT_ASSIGNEE if has_copilot_assignee(issue) else None
+        task_id = create_kanban_task(
+            issue["title"],
+            task_body,
+            dry_run,
+            idempotency_key=idempotency_key,
+            assignee=assignee,
+        )
         if task_id:
-            add_sentinel_to_issue(repo, issue["number"], task_id, dry_run)
+            # Avoid high-volume GitHub writes when backfilling all-open scope.
+            if open_scope == "agent-ready":
+                add_sentinel_to_issue(repo, issue["number"], task_id, dry_run)
 
     # ── Status sync: Kanban status → GitHub labels ────────────────────────────
     print("\n[Status sync: Kanban → GitHub labels]")
@@ -419,12 +455,18 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--dry-run", action="store_true", help="Print what would be done without making changes")
     parser.add_argument("--repo", default=REPO, help=f"GitHub repo (default: {REPO})")
+    parser.add_argument(
+        "--open-scope",
+        choices=["agent-ready", "all"],
+        default="agent-ready",
+        help="Which open issues to mirror into Kanban (default: agent-ready)",
+    )
     args = parser.parse_args()
 
     if args.dry_run:
         print("[DRY RUN — no changes will be made]\n")
 
-    sync(args.repo, args.dry_run)
+    sync(args.repo, args.dry_run, args.open_scope)
 
 
 if __name__ == "__main__":
