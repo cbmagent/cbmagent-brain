@@ -1,0 +1,6 @@
+# Repo-internal mirror/stale copy that should not be committed
+cbmagent-brain/
+
+# Python cache
+__pycache__/
+*.pyc

@@ -38,6 +38,12 @@
       "problemMatcher": []
     },
     {
+      "label": "Hermes: verify providers",
+      "type": "shell",
+      "command": "python3 scripts/hermes-verification.py --check-fallbacks",
+      "problemMatcher": []
+    },
+    {
       "label": "GitHub: open PRs",
       "type": "shell",
       "command": "gh pr list --repo cbmagent/cbmagent-brain --limit 30",
