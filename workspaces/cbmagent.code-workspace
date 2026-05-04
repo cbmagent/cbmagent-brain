@@ -9,20 +9,24 @@
       "path": "../../clarkemoyer.com"
     },
     {
-      "name": "technologyadoptionbarriers.org (clone when local)",
+      "name": "technologyadoptionbarriers.org",
       "path": "../../technologyadoptionbarriers.org"
     },
     {
-      "name": "FFC Single Page Template (clone when local)",
+      "name": "FFC Single Page Template",
       "path": "../../FFC-IN-FFC_Single_Page_Template"
     },
     {
-      "name": "FFC Footer Only Template (clone when local)",
+      "name": "FFC Footer Only Template",
       "path": "../../FFC-IN-Footer_Only_Template"
     },
     {
-      "name": "FFC Cloudflare Automation (clone when local)",
+      "name": "FFC Cloudflare Automation",
       "path": "../../FFC-Cloudflare-Automation"
+    },
+    {
+      "name": "openclaw-deployment",
+      "path": "../../openclaw-deployment"
     }
   ],
   "settings": {
