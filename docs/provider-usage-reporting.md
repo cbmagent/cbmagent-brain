@@ -20,11 +20,23 @@ Some subscription/OAuth providers expose limited or opaque quota data. For those
 A daily report should include:
 
 - current Hermes provider/model
-- OpenClaw gateway status
-- recent rate-limit/cooldown messages
+- OpenClaw gateway status and `/v1/models` inventory count
+- recent rate-limit/cooldown messages from Hermes and OpenClaw logs
+- explicit OpenClaw health classification: `healthy`, `degraded`, or `unavailable`
+- fallback routing recommendation when OpenClaw is cooling down or unreachable
 - GitHub Actions recent failures/stalls
 - recommended provider routing for the day
 - human tasks needed, if any
+
+## OpenClaw Health Checks
+
+Use `scripts/provider-usage-report.py` for read-only OpenClaw monitoring:
+
+```bash
+python scripts/provider-usage-report.py
+```
+
+The script checks the local OpenClaw gateway root and OpenAI-compatible model list at `http://127.0.0.1:18789/v1/models`, parses model IDs, scans recent Hermes/OpenClaw logs for cooldown/rate-limit terms, and writes redacted Markdown/JSON under `reports/provider-usage/`. It does not mutate OpenClaw, GitHub, DNS, or provider configuration.
 
 ## Hermes Verification
 
