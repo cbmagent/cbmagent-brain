@@ -1,0 +1,68 @@
+{
+  "checks": {
+    "hermes_auth_list": {
+      "exit_code": 0,
+      "latency_ms": 883,
+      "ok": true,
+      "stderr_redacted": "",
+      "stdout_redacted": "copilot (2 credentials):\n  #1  gh auth token        api_key gh_cli \u2190\n  #2  GITHUB_TOKEN         api_key env:GITHUB_TOKEN\n\nnous (1 credentials):\n  #1  device_code          oauth   device_code \u2190\n\nopenai-codex (1 credentials):\n  #1  device_code          oauth   device_code \u2190\n\n"
+    },
+    "hermes_config_show": {
+      "exit_code": 0,
+      "latency_ms": 473,
+      "ok": true,
+      "stderr_redacted": "",
+      "stdout_redacted": "\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502              \u2695 Hermes Configuration                    \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\n\u25c6 Paths\n  Config:       /home/cbmagent/.hermes/config.yaml\n  Secrets:      [REDACTED]\n  Install:      /home/cbmagent/.hermes/hermes-agent\n\n\u25c6 API Keys\n  OpenRouter     (not set)\n  OpenAI (STT/TTS) (not set)\n  Exa            (not set)\n  Parallel       (not set)\n  Firecrawl      (not set)\n  Tavily         (not set)\n  Browserbase    (not set)\n  Browser Use    (not set)\n  FAL            (not set)\n  Anthropic      (not set)\n\n\u25c6 Model\n  Model:        {'default': 'gpt-5.5', 'provider': 'openai-codex'}\n  Max turns:    60\n\n\u25c6 Display\n  Personality:  kawaii\n  Reasoning:    off\n  Bell:         off\n  User preview: first 2 line(s), last 2 line(s)\n\n\u25c6 Terminal\n  Backend:      local\n  Working dir:  .\n  Timeout:      180s\n\n\u25c6 Timezone\n  Timezone:     (server-local)\n\n\u25c6 Context Compression\n  Enabled:      yes\n  Threshold:    50%\n  Target ratio: 20% of threshold preserved\n  Protect last: 20 messages\n  Model:        (auto)\n\n\u25c6 Messaging Platforms\n  Telegram:     configured\n  Discord:      not configured\n\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n  hermes config edit     # Edit config file\n  hermes config set <key> <value>\n  hermes setup           # Run setup wizard\n\n"
+    },
+    "hermes_fallback_list": {
+      "exit_code": 0,
+      "latency_ms": 321,
+      "ok": true,
+      "stderr_redacted": "",
+      "stdout_redacted": "\n  Primary:   gpt-5.5  (via openai-codex)\n\n  Fallback chain (2 entries):\n    1. anthropic/claude-sonnet-4.6  (via nous)\n    2. gpt-5.5  (via copilot)\n\n  Tried in order when the primary fails (rate-limit, 5xx, connection errors).\n  Docs: https://hermes-agent.nousresearch.com/docs/user-guide/features/fallback-providers\n\n"
+    },
+    "hermes_status": {
+      "exit_code": 0,
+      "latency_ms": 1525,
+      "ok": true,
+      "stderr_redacted": "",
+      "stdout_redacted": "\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                 \u2695 Hermes Agent Status                  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\n\u25c6 Environment\n  Project:      /home/cbmagent/.hermes/hermes-agent\n  Python:       3.11.15\n  .env file:    \u2713 exists\n  Model:        gpt-5.5\n  Provider:     OpenAI Codex\n\n\u25c6 API Keys\n  OpenRouter    \u2717 (not set)\n  OpenAI        \u2717 (not set)\n  NVIDIA        \u2717 (not set)\n  Z.AI/GLM      \u2717 (not set)\n  Kimi          \u2717 (not set)\n  StepFun Step Plan  \u2717 (not set)\n  MiniMax       \u2717 (not set)\n  MiniMax-CN    \u2717 (not set)\n  Firecrawl     \u2717 (not set)\n  Tavily        \u2717 (not set)\n  Browser Use   \u2717 (not set)\n  Browserbase   \u2717 (not set)\n  FAL           \u2717 (not set)\n  Tinker        \u2717 (not set)\n  WandB         \u2717 (not set)\n  ElevenLabs    \u2717 (not set)\n  GitHub        \u2713 gho_...ABTb\n  Anthropic     \u2717 (not set)\n\n\u25c6 Auth Providers\n  Nous Portal   \u2713 logged in\n    Portal URL: https://portal.nousresearch.com\n    Access exp: 2026-05-04 03:48:07 EDT\n    Key exp:    2026-05-04 15:53:41 EDT\n    Refresh:    yes\n  OpenAI Codex  \u2713 logged in\n    Auth file:  /home/cbmagent/.hermes/auth.json[REDACTED]\n    Refreshed:  2026-05-03 16:14:31 EDT\n  Qwen OAuth    \u2717 not logged in (run: qwen auth qwen-oauth)\n    Auth file:  /home/cbmagent/.qwen/oauth_creds.json\n    Error:      Qwen CLI credentials not found. Run 'qwen auth qwen-oauth' first.\n  MiniMax OAuth  \u2717 not logged in (run: hermes auth add minimax-oauth)\n\n\u25c6 Nous Tool Gateway\n  Nous Portal   \u2713 managed tools available\n  Web tools       \u2713 included by subscription, not currently selected\n  Image generation \u2713 active via Nous subscription\n  OpenAI TTS      \u2713 active via Edge TTS\n  Browser automation \u2713 active via Nous subscription\n  Modal execution \u2713 active via local\n\n\u25c6 API-Key Providers\n  Z.AI / GLM       \u2717 not configured (run: hermes model)\n  Kimi / Moonshot  \u2717 not configured (run: hermes model)\n  StepFun Step Plan \u2717 not configured (run: hermes model)\n  MiniMax          \u2717 not configured (run: hermes model)\n  MiniMax (China)  \u2717 not configured (run: hermes model)\n\n\u25c6 Terminal Backend\n  Backend:      local\n  Sudo:         \u2717 disabled\n\n\u25c6 Messaging Platforms\n  Telegram      \u2713 configured (home: 8742801497)\n  Discord       \u2717 not configured\n  WhatsApp      \u2717 not configured\n  Signal        \u2717 not configured\n  Slack         \u2717 not configured\n  Email         \u2717 not configured\n  SMS           \u2717 not configured\n  DingTalk      \u2717 not configured\n  Feishu        \u2717 not configured\n  WeCom         \u2717 not configured\n  WeCom Callback  \u2717 not configured\n  Weixin        \u2717 not configured\n  BlueBubbles   \u2717 not configured\n  QQBot         \u2717 not configured\n  Yuanbao       \u2717 not configured\n\n\u25c6 Gateway Service\n  Status:       \u2713 running\n  Manager:      systemd (user)\n  PID(s):       31463, 119640\n\n\u25c6 Scheduled Jobs\n  Jobs:         3 active, 3 total\n\n\u25c6 Sessions\n  Active:       1 session(s)\n\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n  Run 'hermes doctor' for detailed diagnostics\n  Run 'hermes setup' to configure\n\n"
+    }
+  },
+  "detected": {
+    "fallbacks": [
+      {
+        "model": "anthropic/claude-sonnet-4.6",
+        "order": 1,
+        "provider": "nous"
+      },
+      {
+        "model": "gpt-5.5",
+        "order": 2,
+        "provider": "copilot"
+      }
+    ],
+    "primary": {
+      "model": "gpt-5.5",
+      "provider": "openai-codex"
+    }
+  },
+  "expensive_checks_skipped": false,
+  "generated_at_utc": "2026-05-04T07-37-53Z",
+  "notes": [
+    "Default mode performs inventory only so scheduled runs do not consume provider quota.",
+    "Live smoke checks intentionally use a tiny response and persist only pass/fail, latency, and redacted failure diagnostics.",
+    "Fallback smoke probes require --include-fallbacks so operators can decide when broader provider checks are worth the cost."
+  ],
+  "redacted": true,
+  "smoke_checks": [
+    {
+      "attempted": true,
+      "exit_code": 0,
+      "latency_ms": 6883,
+      "model": "gpt-5.5",
+      "ok": true,
+      "provider": "openai-codex"
+    }
+  ]
+}

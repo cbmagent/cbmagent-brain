@@ -25,3 +25,22 @@ A daily report should include:
 - GitHub Actions recent failures/stalls
 - recommended provider routing for the day
 - human tasks needed, if any
+
+## Hermes Verification
+
+Use `scripts/hermes-verification.py` for redacted Hermes routing checks:
+
+```bash
+# Cheap inventory only; safe for scheduled runs. Add --strict if callers
+# should fail when the Hermes CLI is unavailable or unhealthy.
+python scripts/hermes-verification.py
+python scripts/hermes-verification.py --strict
+
+# Tiny live primary-provider smoke probe.
+python scripts/hermes-verification.py --smoke
+
+# Probe primary plus configured fallback providers when worth the quota.
+python scripts/hermes-verification.py --smoke --include-fallbacks
+```
+
+The script writes JSON/Markdown reports under `reports/hermes-verification/`. It records provider/model names, pass/fail state, and latency; it intentionally avoids persisting prompt text, completion text, credential files, tokens, or API keys. The GitHub Actions workflow `.github/workflows/hermes-verification.yml` runs inventory on a schedule and exposes manual inputs for smoke probes.
