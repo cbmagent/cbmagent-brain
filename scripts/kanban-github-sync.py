@@ -40,9 +40,14 @@ KANBAN_DB = HERMES_HOME / "kanban.db"
 AGENT_READY_LABEL = "status:agent-ready"
 IN_PROGRESS_LABEL = "status:in-progress"
 BLOCKED_LABEL = "status:blocked-human"
+REVIEW_REQUESTED_LABELS = {"status:review-requested", "review-requested"}
 AGENT_BRAIN_LABEL = "agent-brain"
+COPILOT_ASSIGNEE = "copilot-github-direct"
+HERMES_REVIEWER_ASSIGNEE = "hermes-reviewer"
 KANBAN_SENTINEL_RE = re.compile(r"<!-- kanban-task: ([a-zA-Z0-9_-]+) -->")
 GITHUB_ISSUE_RE = re.compile(r"github-issue:\s*#(\d+)", re.IGNORECASE)
+TASK_REPO_RE = re.compile(r"^repo:\s*([^\s]+)\s*$", re.IGNORECASE | re.MULTILINE)
+TASK_URL_RE = re.compile(r"^github-url:\s*https?://github\.com/([^/]+/[^/\s]+)", re.IGNORECASE | re.MULTILINE)
 
 
 def gh(*args, check=True, capture=True) -> str:
@@ -106,6 +111,20 @@ def get_all_open_github_issues(repo: str):
     return json.loads(raw)
 
 
+def get_all_github_issues_state(repo: str, limit: int = 200):
+    """Fetch issue state/labels/assignees in one call (cheap signal scan)."""
+    raw = gh(
+        "issue", "list",
+        "--repo", repo,
+        "--state", "all",
+        "--limit", str(limit),
+        "--json", "number,title,url,state,labels,assignees",
+    )
+    if not raw:
+        return []
+    return json.loads(raw)
+
+
 def extract_kanban_id_from_issue(issue: dict) -> str | None:
     body = issue.get("body") or ""
     m = KANBAN_SENTINEL_RE.search(body)
@@ -116,6 +135,17 @@ def extract_issue_number_from_task(task: dict) -> int | None:
     body = task.get("body") or ""
     m = GITHUB_ISSUE_RE.search(body)
     return int(m.group(1)) if m else None
+
+
+def extract_repo_from_task(task: dict) -> str | None:
+    body = task.get("body") or ""
+    m = TASK_REPO_RE.search(body)
+    if m:
+        return m.group(1).strip()
+    m = TASK_URL_RE.search(body)
+    if m:
+        return m.group(1).strip()
+    return None
 
 
 def label_names(issue: dict) -> set:
@@ -168,6 +198,63 @@ def create_kanban_task(title: str, body: str, dry_run: bool) -> str | None:
     # hermes kanban create prints the task id on stdout
     m = re.search(r"([a-f0-9]{8,})", result.stdout)
     return m.group(1) if m else None
+
+
+def assign_kanban_task(task_id: str, profile: str, dry_run: bool):
+    print(f"  ~ assign {task_id} -> {profile}")
+    if not dry_run:
+        hermes("kanban", "assign", task_id, profile)
+
+
+def claim_kanban_task(task_id: str, dry_run: bool):
+    print(f"  ~ claim {task_id} (set running)")
+    if not dry_run:
+        hermes("kanban", "claim", task_id)
+
+
+def complete_kanban_task(task_id: str, summary: str, dry_run: bool):
+    print(f"  ✓ complete task {task_id}")
+    if not dry_run:
+        hermes("kanban", "complete", task_id, "--summary", summary)
+
+
+def has_review_requested_label(issue: dict) -> bool:
+    labels = {l["name"].lower() for l in issue.get("labels", [])}
+    return any(name in labels for name in REVIEW_REQUESTED_LABELS)
+
+
+def has_copilot_assignee(issue: dict) -> bool:
+    assignees = {a.get("login", "").lower() for a in issue.get("assignees", [])}
+    return "copilot" in assignees
+
+
+def create_review_handoff_task(repo: str, issue: dict, dry_run: bool):
+    issue_num = issue["number"]
+    title = f"Review requested: {repo} #{issue_num} - {issue['title']}"
+    body = (
+        f"repo: {repo}\n"
+        f"github-issue: #{issue_num}\n"
+        f"github-url: {issue['url']}\n"
+        f"handoff: external-agent-requested-review\n"
+        f"source-agent: copilot-github-direct\n\n"
+        "Review request detected via issue label. Hermes reviewer should validate the external agent's proposed changes and decide approve/request changes."
+    )
+    key = f"review:{repo}#{issue_num}"
+    print(f"  + review handoff task for issue #{issue_num}")
+    if dry_run:
+        return
+    result = subprocess.run(
+        [
+            "hermes", "kanban", "create", title,
+            "--body", body,
+            "--idempotency-key", key,
+            "--assignee", HERMES_REVIEWER_ASSIGNEE,
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        print(f"  [warn] unable to create review handoff task for #{issue_num}: {result.stderr.strip()}", file=sys.stderr)
 
 def add_sentinel_to_issue(repo: str, issue_number: int, task_id: str, dry_run: bool):
     """Append kanban sentinel to issue body."""
@@ -247,6 +334,9 @@ def sync(repo: str, dry_run: bool):
         issue_num = extract_issue_number_from_task(task)
         if issue_num is None:
             continue
+        task_repo = extract_repo_from_task(task)
+        if task_repo and task_repo.lower() != repo.lower():
+            continue
         issue = issue_by_number.get(issue_num)
         if issue is None:
             continue  # Issue closed or missing — skip
@@ -286,6 +376,41 @@ def sync(repo: str, dry_run: bool):
                 f"*Auto-synced by kanban-github-sync at {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}*"
             )
             close_issue(repo, issue_num, comment, dry_run)
+
+    # ── External agent signal sync (low-cost) ────────────────────────────────
+    # Uses one GH list call (state + labels + assignees). No comment polling.
+    print("\n[External agent signal sync]")
+    all_issue_state = get_all_github_issues_state(repo)
+    state_by_number = {i["number"]: i for i in all_issue_state}
+
+    for task in tasks:
+        issue_num = extract_issue_number_from_task(task)
+        if issue_num is None:
+            continue
+        task_repo = extract_repo_from_task(task)
+        if task_repo and task_repo.lower() != repo.lower():
+            continue
+        issue = state_by_number.get(issue_num)
+        if issue is None:
+            continue
+
+        if issue.get("state") != "OPEN":
+            if task["status"] != "done":
+                complete_kanban_task(
+                    task["id"],
+                    f"Auto-completed: GitHub issue #{issue_num} is {issue.get('state', 'closed').lower()}.",
+                    dry_run,
+                )
+            continue
+
+        if has_copilot_assignee(issue):
+            if task.get("assignee") != COPILOT_ASSIGNEE:
+                assign_kanban_task(task["id"], COPILOT_ASSIGNEE, dry_run)
+            if task["status"] in ("ready", "todo", "triage"):
+                claim_kanban_task(task["id"], dry_run)
+
+        if has_review_requested_label(issue):
+            create_review_handoff_task(repo, issue, dry_run)
 
     print("\n[Done]")
 
